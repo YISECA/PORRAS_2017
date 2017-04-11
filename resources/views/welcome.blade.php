@@ -93,7 +93,7 @@
                             <li>Iglesia de la concepción (Pasaje Rivas)</li>
                             <li>Museo Santa Clara (Sujeto a políticas de ingreso)</li>
                             <li>Iglesia de San Agustín</li>
-                            <li>Iglesia del Carmen “La Empijamada</li>
+                            <li>Iglesia del Carmen “La Empijamada”</li>
                             <li>Iglesia de la Candelaria</li>
                             <li>Sala de las custodias Museo de Arte del Banco de la Republica</li>
                             <li>Cra. 6° Calle de Artículos Religiosos</li>
