@@ -18,7 +18,7 @@ class Form extends Model
 
 
 
-   protected $table = 'centro_internacional_1';
+   protected $table = 'semana_santa_9am';
 
 
 
