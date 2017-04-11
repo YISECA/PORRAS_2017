@@ -171,7 +171,7 @@
 
                                         <td width="282" bgcolor="#deeaf6" style="border: 1px solid #5b9bd5; padding-top: 0cm; padding-bottom: 0cm; padding-left: 0.16cm; padding-right: 0.19cm">
 
-                                            <p>60 Personsa</p>
+                                            <p>60 Personas</p>
 
                                         </td>
 

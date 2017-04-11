@@ -335,11 +335,11 @@ class FormController extends BaseController
 
         Mail::send('email', ['user' => $request->input('mail')], function ($m) use ($request) {
 
-            $m->from('no-reply@idrd.gov.co', 'Registro Exitoso a esta Caminata');
+            $m->from('no-reply@idrd.gov.co', 'Registro Exitoso a este Recorrido');
 
 
 
-            $m->to($request->input('mail'), $request->input('primer_nombre'))->subject('Registro Exitoso a esta caminata!');
+            $m->to($request->input('mail'), $request->input('primer_nombre'))->subject('Registro Exitoso a este Recorrido!');
 
         });
 
