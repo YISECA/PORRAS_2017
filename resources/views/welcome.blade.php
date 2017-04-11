@@ -40,14 +40,14 @@
 
                                <li class="elmnt-two">
                                     
-                                        <div class="wrap"><img src="public/Img/centro2.jpg"  height="400">
+                                        <div class="wrap"><img src="public/Img/santa1.jpg"  height="400">
 
                                         </div>                                 
                                 </li>
 
                                  <li class="elmnt-three">
                                     
-                                        <div class="wrap"><img src="public/Img/centro3.jpg"  height="400">
+                                        <div class="wrap"><img src="public/Img/santa2.jpg"  height="400">
 
                                         </div>                                 
                                 </li>
@@ -96,10 +96,7 @@
                             <li>Iglesia del Carmen “La Empijamada</li>
                             <li>Iglesia de la Candelaria</li>
                             <li>Sala de las custodias Museo de Arte del Banco de la Republica</li>
-                            <li>Museo Santa Clara (Sujeto a políticas de ingreso)</li>
-                            <li>Cra. 6° Calle de Artículos Religiosos )</li>
-                            <li>Museo Santa Clara (Sujeto a políticas de ingreso)</li>
-                            <li>Museo Santa Clara (Sujeto a políticas de ingreso)</li>
+                            <li>Cra. 6° Calle de Artículos Religiosos</li>
                             <li>Iglesia de San Francisco</li>
                             <li>Iglesia de la Veracruz “Panteón Nacional”</li>
                             <li>Iglesia de la Tercera Orden </li>
