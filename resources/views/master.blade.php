@@ -126,7 +126,7 @@
 
               <!--<li><a href="descarga" id="a-descarga">Descargar Carnet</a></li>-->
 
-              <li><a href="login" id="a-login" >Iniciar sesion</a></li>
+              <!--<li><a href="login" id="a-login" >Iniciar sesion</a></li>-->
 
             </ul>
 

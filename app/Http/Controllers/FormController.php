@@ -260,6 +260,7 @@ class FormController extends BaseController
 
       if (empty($usuario)) { return view('error',['error' => 'Usuario o contraseña invalida!'] ); exit(); }
 
+      if (empty($acceso)) { return view('error',['error' => 'Usuario o contraseña invalida!'] ); exit(); }
        
 
        session_start() ;

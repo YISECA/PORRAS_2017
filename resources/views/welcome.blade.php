@@ -20,7 +20,8 @@
 
                     <div class="freebirdFormviewerViewHeaderTitleRow">
 
-                        <div class="freebirdFormviewerViewHeaderTitle" dir="auto" role="heading" aria-level="1">Caminata RÍO VICACHA O SAN FRANCISCO 12 de MARZO de 2017</div>
+                        <div class="freebirdFormviewerViewHeaderTitle" dir="auto" role="heading" aria-level="1"><font size="5">RECORRIDOS RELIGIOSOS EN SEMANA SANTA 13 de ABRIL de 2017</font></div>
+                        <div class="freebirdFormviewerViewHeaderTitle" dir="auto" role="heading" aria-level="1"><font size="5" color="#00ade6">HORARIO SALIDA - 9:00 AM</font></div>
 
                     </div>
 <br>
@@ -32,24 +33,25 @@
 
                                 <li class="elmnt-one">                                 
 
-                                        <div class="wrap"><img src="public/Img/vica.jpg"  height="400">
+                                        <div class="wrap"><img src="public/Img/santa.jpg"  height="400">
 
                                         </div>                                   
                                 </li>
 
                                <li class="elmnt-two">
                                     
-                                        <div class="wrap"><img src="public/Img/vica1.jpg"  height="400">
+                                        <div class="wrap"><img src="public/Img/centro2.jpg"  height="400">
 
                                         </div>                                 
                                 </li>
 
                                  <li class="elmnt-three">
                                     
-                                        <div class="wrap"><img src="public/Img/vica2.jpg"  height="400">
+                                        <div class="wrap"><img src="public/Img/centro3.jpg"  height="400">
 
                                         </div>                                 
                                 </li>
+                                 
 
                             </ul>
 
@@ -63,7 +65,7 @@
 
                             <li><a href="">•</a></li>
 
-                            <li><a href="">•</a></li>
+                            <li><a href="">•</a></li>            
                          
                         </ul>
 
@@ -73,23 +75,34 @@
 
                     <div class="freebirdFormviewerViewHeaderDescription" dir="auto">
 
-                        <h2>Ubicación</h2>
+                        <!--<h2>Ubicación</h2>-->
 
-                        <p><font size="3">El sendero del río San Francisco o Vicachá está ubicado en las localidades de Candelaria y Santafé, marcaba el límite norte de Bogotá en sus primeros años de fundación. Nace en el páramo de Cruz Verde y baja por el cañón, entre los  cerros de Monserrate y Guadalupe. Al llegar a la ciudad en la Quinta de Bolívar es canalizado. En la actual avenida Jiménez con calle Sexta, confluye por debajo de la tierra con el río San Agustín.</font></p>
+                        <p><font size="3">La semana mayor en Bogotá cuenta con tradición y gran participación tanto de locales como visitantes. En el centro histórico de La Candelaria y en la localidad de Santa Fe, se concentran las iglesias de mayor tradición histórica de la ciudad, declaradas bien de interés cultura, su excelente estado de conservación permite disfrutar de su valor cultural, artístico y tradicional.</font></p>
 
                         <h2>Descripción del recorrido </h2>
 
-                        <p><font size="3">El recorrido da inicio en la Plazoleta del Rosario ubicada frente a la estación Museo del oro, donde se realizara un calentamiento de aproximadamente 20 minutos, el guía de caminatas del IDRD dará las recomendaciones propias de la caminata. Inmediatamente después se dará inicio a la caminata desde la carrera 7ª con avenida Jiménez desplazándose hacia el oriente por el eje ambiental hasta llegar a la avenida circunvalar e ingresando a los predios del acueducto. En este sector se construyó un sendero por el bosque de niebla que conduce al mirador donde se puede apreciar el centro de la ciudad. El sendero en descenso nos lleva a la universidad distrital y de allí a la avenida Jiménez con carrera 3ª donde finaliza la caminata.</font></p>
+                        <p><font size="3">El recorrido inicia en la plaza de Bolivar costado Nororiental, en frente de la Catedral Primada de Colombia, donde una introducción a cerca de la fundación y la participación de las comunidades religiosas como: Franciscanos y Clarisas, Agustinos, Jesuitas y Salesianos en dicho proceso, nos abre el camino a un recorrido religioso donde conoceremos la historia y la riqueza cultural de 10 iglesias, anécdotas de conventos y otros atractivos que complementan este recorrido.</font></p>
 
-                        <h2>Durante el recorrido se visitaran los siguientes atractivos:</h2>
+                        <h2>Ingreso sujeto a horarios establecidos:</h2>
                         <ul class="ul_inicio">
                             <font size="3">
-                            <li>Históricos</li>
-                            <li>Culturales</li>
-                            <li>Arquitectónicos</li>
-                            <li>Hídricos</li>
-                            <li>Ambientales</li>
-                            <li>Ecosistema de niebla y sub- páramo</li>
+                            <li>Catedral Primada de Colombia </li>
+                            <li>Capilla del Sagrario</li>
+                            <li>Palacio Cardenalicio (Exterior) – Vistas Papales</li>
+                            <li>Iglesia de San Ignacio </li>
+                            <li>Iglesia de la concepción (Pasaje Rivas)</li>
+                            <li>Museo Santa Clara (Sujeto a políticas de ingreso)</li>
+                            <li>Iglesia de San Agustín</li>
+                            <li>Iglesia del Carmen “La Empijamada</li>
+                            <li>Iglesia de la Candelaria</li>
+                            <li>Sala de las custodias Museo de Arte del Banco de la Republica</li>
+                            <li>Museo Santa Clara (Sujeto a políticas de ingreso)</li>
+                            <li>Cra. 6° Calle de Artículos Religiosos )</li>
+                            <li>Museo Santa Clara (Sujeto a políticas de ingreso)</li>
+                            <li>Museo Santa Clara (Sujeto a políticas de ingreso)</li>
+                            <li>Iglesia de San Francisco</li>
+                            <li>Iglesia de la Veracruz “Panteón Nacional”</li>
+                            <li>Iglesia de la Tercera Orden </li>
                             </font>
                         </ul>
                         <br>
@@ -110,7 +123,7 @@
 
                                         <td width="282" bgcolor="#ffffff" style="border: 1px solid #5b9bd5; padding-top: 0cm; padding-bottom: 0cm; padding-left: 0.16cm; padding-right: 0.19cm">
 
-                                            <p>Plazoleta del rosario, frente a la estación Museo del Oro</p>
+                                            <p>Carrera 7 calle 11 Frente a la catedral primada - Barrio La Candelaria</p>
 
                                         </td>
 
@@ -126,7 +139,7 @@
 
                                         <td width="282" bgcolor="#deeaf6" style="border: 1px solid #5b9bd5; padding-top: 0cm; padding-bottom: 0cm; padding-left: 0.16cm; padding-right: 0.19cm">
 
-                                            <p>Domingo 12 de Marzo de 2017</p>
+                                            <p>Jueves 13 deAbril de 2017</p>
 
                                         </td>
 
@@ -142,7 +155,7 @@
 
                                         <td width="282" bgcolor="#ffffff" style="border: 1px solid #5b9bd5; padding-top: 0cm; padding-bottom: 0cm; padding-left: 0.16cm; padding-right: 0.19cm">
 
-                                            <p>8:00 a.m</p>
+                                            <p>9:00 a.m</p>
 
                                         </td>
 
@@ -158,7 +171,7 @@
 
                                         <td width="282" bgcolor="#deeaf6" style="border: 1px solid #5b9bd5; padding-top: 0cm; padding-bottom: 0cm; padding-left: 0.16cm; padding-right: 0.19cm">
 
-                                            <p>40 Personsa</p>
+                                            <p>60 Personsa</p>
 
                                         </td>
 
@@ -174,7 +187,7 @@
 
                                         <td width="282" bgcolor="#ffffff" style="border: 1px solid #5b9bd5; padding-top: 0cm; padding-bottom: 0cm; padding-left: 0.16cm; padding-right: 0.19cm">
 
-                                            <p>12 - 60 Años</p>
+                                            <p>“APTA PARA TODA LA FAMILIA”</p>
 
                                         </td>
 
@@ -192,7 +205,7 @@
 
                                         <td width="282" bgcolor="#deeaf6" style="border: 1px solid #9cc2e5; padding-top: 0cm; padding-bottom: 0cm; padding-left: 0.16cm; padding-right: 0.19cm">
 
-                                            <p>2.800 m.s.n.m</td>
+                                            <p>2.600 m.s.n.m</td>
 
                                     </tr>
 
@@ -206,7 +219,7 @@
 
                                         <td width="282" bgcolor="#ffffff" style="border: 1px solid #9cc2e5; padding-top: 0cm; padding-bottom: 0cm; padding-left: 0.16cm; padding-right: 0.19cm">
 
-                                            <p>14°</p>
+                                            <p>12°</p>
 
                                         </td>
 
@@ -221,7 +234,7 @@
 
                                         <td width="282" bgcolor="#deeaf6" style="border: 1px solid #9cc2e5; padding-top: 0cm; padding-bottom: 0cm; padding-left: 0.16cm; padding-right: 0.19cm">
 
-                                            <p>Medio</p>
+                                            <p>Bajo Apto para toda la familia</p>
 
                                         </td>
 
@@ -230,13 +243,13 @@
 
                                         <td width="281" bgcolor="#ffffff" style="border: 1px solid #9cc2e5; padding-top: 0cm; padding-bottom: 0cm; padding-left: 0.16cm; padding-right: 0.19cm">
 
-                                            <p>Distancia</p>
+                                            <p>Duración</p>
 
                                         </td>
 
                                         <td width="282" bgcolor="#ffffff" style="border: 1px solid #9cc2e5; padding-top: 0cm; padding-bottom: 0cm; padding-left: 0.16cm; padding-right: 0.19cm">
 
-                                            <p>3.5 km</p>
+                                            <p>9:00 a.m. a 12:00 m </p>
 
                                         </td>
 
@@ -255,21 +268,12 @@
                             
                                 <li>Llevar bloqueador solar</li>
 
-                                <li>Hidratación</li>
+                                <li>Hidratación y Refrigerio</li>
 
                                 <li>Calzado cómodo</li>
 
-                                <li>Llevar carné de la eps</li>
+                                <li>Sombrilla Opcional </li>
 
-                                <li>Refrigerio.</li>
-
-                                <li>Medicamentos personales </li>
-
-                                <li>No llevar mascotas </li>
-
-                                <li>Abstenerse de participar: mujeres en estado de embarazo, personas que tengan problemas de salud complejos</li>
-
-                                <li><ins>Abstenerse de asistir si no se encuentra inscrito</ins></li>
                             </font>
 
                             <br>

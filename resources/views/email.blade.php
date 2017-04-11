@@ -2,9 +2,9 @@
 
 
 
-<h1>Caminata RÍO VICACHA O SAN FRANCISCO 12 de Marzo de 2017</h1>
+<h1>RECORRIDOS RELIGIOSOS EN SEMANA SANTA 13 de ABRIL de 2017 </h1>
 
-
+<h1>HORARIO SALIDA : 9:00 AM </h1>
 
 <h1>Su registro fue exitoso!</h1>
 
