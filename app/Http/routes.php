@@ -1,7 +1,5 @@
 <?php
 
-
-
 Route::any('/','MainController@index');
 
 Route::post('traer_eventos','MainController@traer_eventos');
@@ -42,12 +40,12 @@ Route::post('traer_edades','MainController@traer_edades');
 
 
 
-
+/*
 Route::get('/', function () {                
 
     return view('welcome');
 
-});
+});*/
 
 
 
