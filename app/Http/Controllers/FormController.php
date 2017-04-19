@@ -112,121 +112,66 @@ class FormController extends BaseController
     }
 
   
-    public function logear(Request $request)
+public function logear(Request $request){
 
-    {
+
 
       $usuario = $request->input('usuario');
       $pass = $request->input('pass');
       $acceso = Acceso::where('Usuario',$usuario)->where('Contrasena', sha1($this->cifrar($pass)) )->first();
       if (empty($usuario)) { return view('error',['error' => 'Usuario o contraseña invalida!'] ); exit(); }
-
-      if (empty($acceso)) { return view('error',['error' => 'Usuario o contraseña invalida!'] ); exit(); }
+      if (empty($acceso)) { return view('error',['error' => 'Usuario o contraseña invalida!'] ); exit(); }    
       session_start() ;
 
+      $_SESSION['id_usuario'] = json_encode($acceso);
+      return view('admin'); exit();       
 
-
-      if (empty($usuario)) { return view('error',['error' => 'Usuario o contraseña invalida!'] ); exit(); }
-
-
-      if (empty($acceso)) { return view('error',['error' => 'Usuario o contraseña invalida!'] ); exit(); }
-       
-
-       session_start() ;
-
-
-
-
-       $_SESSION['id_usuario'] = json_encode($acceso);
-       return view('admin'); exit(); 
     }
 
 
-    private function obtener_edad($date)
-
-    {
+    private function obtener_edad($date) {
 
      list($Y,$m,$d) = explode("-",$date);
-     return( date("md") < $m.$d ? date("Y")-$Y-1 : date("Y")-$Y ); 
+     return( date("md") < $m.$d ? date("Y")-$Y-1 : date("Y")-$Y );
     }
 
 
-    public function insertar(Request $request)
+//insertar
 
-    {
+public function insertar(Request $request){
+
       $post = $request->input();
-      /*$usuario = Form::where('cedula_representante', $request->input('cedula_representante'))->first(); 
+     /* $usuario = Form::where('cedula', $request->input('cedula'))->first(); 
       if (!empty($usuario)) { return view('error',['error' => 'Este usuario ya fue registrado!'] ); exit(); }*/
-
       $formulario = new Form([]);
+
         //envio de correo
-       if($this->inscritos()<=40)
 
+      if($this->inscritos()<=50){
 
-      {
         if(empty($request->tipo_colegio)){
            $request->request->add(['tipo_colegio' => 0]);
         }
 
-
-
-       if($this->inscritos()<=60){
-
-
-      $usuario = Form::where('cedula', $request->input('cedula'))->first(); 
-
-
-
-       if (!empty($usuario)) { return view('error',['error' => 'Este usuario ya fue registrado!'] ); exit(); }
-
-
-
-       $formulario = new Form([]);
-
-        
-
-        //envio de correo
-
-
-
-       if($this->inscritos()<=60){
-
-
-
-
-        $this->store($formulario, $request->input());
-        Mail::send('email', ['user' => $request->input('mail')], function ($m) use ($request) {
-        $m->from('no-reply@idrd.gov.co', 'Registro Exitoso a esta Caminata');
-
-
-        $m->to($request->input('mail'), $request->input('primer_nombre'))->subject('Registro Exitoso a esta caminata!');
-
-      });
-
-            $m->from('no-reply@idrd.gov.co', 'Registro Exitoso a este Recorrido');
-
-
-
-            $m->to($request->input('mail'), $request->input('primer_nombre'))->subject('Registro Exitoso a este Recorrido!');
+      $this->store($formulario, $request->input());
+      Mail::send('email', ['user' => $request->input('mail')], function ($m) use ($request) {
+      $m->from('no-reply@idrd.gov.co', 'Registro Exitoso a esta Caminata');
+      $m->to($request->input('mail'), $request->input('primer_nombre'))->subject('Registro Exitoso a esta caminata!');
 
         });
 
-
       }else{
-
-
-
-        return view('error', ['error' => 'Lo sentimos el limite de inscritos fue superado!']);
-
-
+      return view('error', ['error' => 'Lo sentimos el limite de inscritos fue superado!']);
 
       }
-
         //envio de correo
         return view('error', ['error' => 'Registro insertado!']);
+    }
 
-      }
 
+
+    //fin insertar
+   
 // conteo de la tabla
 
     private function inscritos(){

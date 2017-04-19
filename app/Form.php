@@ -15,18 +15,8 @@ class Form extends Model
 {
 
     //
+  protected $table = 'porras_2017';
 
-
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-   protected $table = 'porras_2017';
-=======
-   protected $table = 'semana_santa_9am';
->>>>>>> master
-=======
-   protected $table = 'semana_santa_9am';
->>>>>>> master
 
 
 
@@ -34,7 +24,7 @@ class Form extends Model
 
 	
 
-	return $this->belongsTo('App\Ciudad','id_ciudad');
+	     return $this->belongsTo('App\Ciudad','id_ciudad');
 
 
 
