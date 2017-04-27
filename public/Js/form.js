@@ -1,5 +1,7 @@
 jQuery(document).ready(function($) {
 
+$('#fecha_nacimiento').datepicker({dateFormat: 'yy-mm-dd',changeMonth: true,changeYear: true,yearRange: "-100:+0"});
+
  $('#tipo').val("");
 	$('select[data-readonly]').on('change', function(e){
 

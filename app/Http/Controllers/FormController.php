@@ -138,11 +138,21 @@ public function logear(Request $request){
 
 //insertar
 
+public function insertar_participante(Request $request){
+    $id_equipo = $request->equipo;
+    $form = Form::with('rangoEdad')->find($id_equipo);
+    $data = [
+      'equipo' => $form,
+    ];
+
+    return view('form', $data);
+}
+
 public function insertar(Request $request){
 
       $post = $request->input();
-     /* $usuario = Form::where('cedula', $request->input('cedula'))->first(); 
-      if (!empty($usuario)) { return view('error',['error' => 'Este usuario ya fue registrado!'] ); exit(); }*/
+     $usuario = Form::where('nombre_institucion', $request->input('nombre_institucion'))->first(); 
+      if (!empty($usuario)) { return view('error',['error' => 'Esta Institución o equipo ya fue registrado!'] ); exit(); }
       $formulario = new Form([]);
 
         //envio de correo
@@ -154,9 +164,11 @@ public function insertar(Request $request){
         }
 
       $this->store($formulario, $request->input());
-      Mail::send('email', ['user' => $request->input('mail')], function ($m) use ($request) {
-      $m->from('no-reply@idrd.gov.co', 'Registro Exitoso a esta Caminata');
-      $m->to($request->input('mail'), $request->input('primer_nombre'))->subject('Registro Exitoso a esta caminata!');
+
+      $id = $formulario->id;
+      Mail::send('email', ['id' => $id], function ($m) use ($request) {
+      $m->from('no-reply@idrd.gov.co', 'Registro Exitoso a este evento');
+      $m->to($request->input('mail'), $request->input('nombre_institucion'))->subject('Registro Exitoso Torneo!');
 
         });
 
@@ -165,7 +177,7 @@ public function insertar(Request $request){
 
       }
         //envio de correo
-        return view('error', ['error' => 'Registro insertado!']);
+        return view('error', ['error' => 'Registro insertado, por favor revise su correo para agregar los integrantes del equipo!']);
     }
 
 

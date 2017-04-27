@@ -1,10 +1,11 @@
 @extends('master')                              
-
+@section('script')
+@parent
+   <script src="{{ asset('public/Js/ingresar_participantes.js') }}"></script>
+@stop
 
 
 @section('content') 
-
-
 
 
 
@@ -22,13 +23,21 @@
 
     	<div class="panel panel-default">
 
-  	<div class="panel-heading">Información Participantes</div>
+  	<div class="panel-heading">
+
+          <h4>Registrar Integrantes al Equipo  o Institución <span style="color:red"> {{$equipo->nombre_institucion}}</span> </h4> 
+          <h4>Rango de edad de integrantes en esta categoría: <span style="color:red" id="rango">{{ $equipo->rangoEdad['edad'] }}</span></h4>
+          <h4 ># Participantes registrados en este Equipo O Institución : <span style="color:red" id="cuenta"></span></h4>
+   </div>
 
   	<div class="panel-body">
 
 
   	<div class="row">
   	<br>
+  <!-- id del equipo-->	
+<input type="hidden" class="form-control" id="id" name="id" value="{{$equipo->id}}" >
+
 
   	<div class="col-md-6"><label class="freebirdFormviewerViewItemsItemItemTitle" for="formGroupExampleInput2">Tipo de Documento <span style="color: red;font-size: 11px;text-transform: capitalize;color:red">(Campo Obligatorio)</span></label></div>
        <div class="col-md-6">
@@ -130,7 +139,7 @@ margin: 0px;" name="acepto" id="acepto"><div class="docssharedWizToggleLabeledCo
 <div class="form-group">
   <button type="button" id="enviar"  class="btn btn-info">Registrar participante en el grupo</button>
 </div>
-<!--<input class="enviar" type="submit" value="Enviar"> -->
+<input class="enviar" type="submit" value="Enviar">
 
 
 
