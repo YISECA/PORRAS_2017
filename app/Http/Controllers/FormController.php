@@ -136,16 +136,50 @@ public function logear(Request $request){
     }
 
 
-//insertar
+public function  insertar_persona(Request $request){
+
+    $form = Form::find($request->id);
+    (empty($form->participantes))? $actuales=array():$actuales=json_decode($form->participantes);
+    array_push( $actuales,
+    [
+      'tipo_documento' => $request->tipo_documento ,
+      'cedula' => $request->cedula ,
+      'fecha_nacimiento' => $request->fecha_nacimiento ,
+      'TX_Ed' => $request->TX_Ed ,
+      'primer_nombre' => $request->primer_nombre ,
+      'segundo_nombre' => $request->segundo_nombre ,
+      'telefono' => $request->telefono ,
+      'eps' => $request->eps
+    ]);
+
+    $form->participantes = json_encode($actuales);
+    $form->save();
+    $_SESSION['equipo'] =$request->id;
+    return redirect('insertar_participante');
+
+}
+
+public function eliminar_participante (Request $request){
+
+    $form = Form::find($request->id);
+    $form->participantes = json_encode($actuales);
+    $form->save();
+    $_SESSION['equipo'] =$request->id;
+    return redirect('insertar_participante');
+
+}
 
 public function insertar_participante(Request $request){
-    $id_equipo = $request->equipo;
+
+    $id_equipo = empty( $request->equipo)?$_SESSION['equipo']:$request->equipo;
     $form = Form::with('rangoEdad')->find($id_equipo);
+    $inscritos = (empty($form->participantes)) ? null : json_decode($form->participantes);
     $data = [
       'equipo' => $form,
+      'inscritos' =>$inscritos
     ];
-
     return view('form', $data);
+
 }
 
 public function insertar(Request $request){
