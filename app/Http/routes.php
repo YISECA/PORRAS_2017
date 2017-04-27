@@ -1,5 +1,5 @@
 <?php
-
+	session_start();
 Route::any('/','MainController@index');
 
 Route::post('traer_eventos','MainController@traer_eventos');
@@ -50,7 +50,7 @@ Route::get('login', function () {
 
 Route::get('cerrar', function () {      
 
-	session_start();
+
 
 	session_destroy();
 
@@ -70,7 +70,9 @@ Route::any('carnet','PdfController@carnet');
 
 Route::post('insertar', 'FormController@insertar');
 
-Route::post('insertar_participante', 'FormController@insertar_participante');
+Route::any('insertar_participante', 'FormController@insertar_participante');
+
+Route::any('insertar_persona', 'FormController@insertar_persona');
 
 Route::any('listar_pais', 'FormController@listar_pais');
 
