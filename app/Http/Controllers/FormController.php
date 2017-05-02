@@ -6,7 +6,7 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\DB as DB;
 use Redirect;
 use Validator;
-use Session;
+use session;
 use App\Form;
 use Idrd\Usuarios\Repo\Departamento;
 use Idrd\Usuarios\Repo\Pais;
@@ -135,48 +135,70 @@ public function logear(Request $request){
      return( date("md") < $m.$d ? date("Y")-$Y-1 : date("Y")-$Y );
     }
 
+public function validar_existe($cedula){
+
+  $equipos = Form::get();
+  foreach ($equipos as $equipo){
+       
+       $inscritos = json_decode($equipo->participantes,true);
+       $collection = collect($inscritos);
+       if ($collection->has($cedula))
+        return $collection->has($cedula);
+
+      
+  }
+
+}
 
 public function  insertar_persona(Request $request){
 
-    $form = Form::find($request->id);
-    (empty($form->participantes))? $actuales=array():$actuales=json_decode($form->participantes);
-    array_push( $actuales,
-    [
-      'tipo_documento' => $request->tipo_documento ,
-      'cedula' => $request->cedula ,
-      'fecha_nacimiento' => $request->fecha_nacimiento ,
-      'TX_Ed' => $request->TX_Ed ,
-      'primer_nombre' => $request->primer_nombre ,
-      'segundo_nombre' => $request->segundo_nombre ,
-      'telefono' => $request->telefono ,
-      'eps' => $request->eps
-    ]);
+    if(!$this->validar_existe($request->cedula)){
+        $form = Form::find($request->id);
+        (empty($form->participantes))? $actuales=array():$actuales=json_decode($form->participantes, true);
+        $actuales[$request->cedula] = [
+          'tipo_documento' => $request->tipo_documento ,
+          'cedula' => $request->cedula ,
+          'fecha_nacimiento' => $request->fecha_nacimiento ,
+          'TX_Ed' => $request->TX_Ed ,
+          'primer_nombre' => $request->primer_nombre ,
+          'segundo_nombre' => $request->segundo_nombre ,
+          'telefono' => $request->telefono ,
+          'eps' => $request->eps
+        ];
 
-    $form->participantes = json_encode($actuales);
-    $form->save();
-    $_SESSION['equipo'] =$request->id;
-    return redirect('insertar_participante');
+        $form->participantes = json_encode($actuales);
+        $form->save();
+        $_SESSION['equipo'] = $request->id;
+        $_SESSION['estado'] = null;
+        return redirect('insertar_participante');
+    }else{ $_SESSION['estado'] = 'Ya fue registrado este participante en este u otro equipo.';  return redirect('insertar_participante');}
+    
 
 }
 
 public function eliminar_participante (Request $request){
-
-    $form = Form::find($request->id);
-    $form->participantes = json_encode($actuales);
+    $_SESSION['equipo'] =$request->equipo;
+    $cedula=$request->cedula;
+    $id_equipo=$request->equipo;
+    $form = Form::with('rangoEdad')->find($id_equipo);
+    $inscritos = json_decode($form->participantes,true);
+    $collection = collect($inscritos);
+    $collection->forget($cedula);
+    $form->participantes= json_encode($collection->toArray());
     $form->save();
-    $_SESSION['equipo'] =$request->id;
     return redirect('insertar_participante');
 
 }
 
 public function insertar_participante(Request $request){
 
-    $id_equipo = empty( $request->equipo)?$_SESSION['equipo']:$request->equipo;
+    $id_equipo = (empty($request->equipo))?$_SESSION['equipo']:$request->equipo;
     $form = Form::with('rangoEdad')->find($id_equipo);
     $inscritos = (empty($form->participantes)) ? null : json_decode($form->participantes);
     $data = [
       'equipo' => $form,
-      'inscritos' =>$inscritos
+      'inscritos' =>$inscritos,
+      'estado' =>  (empty($_SESSION['estado']))?null:$_SESSION['estado']
     ];
     return view('form', $data);
 
@@ -272,6 +294,8 @@ public function insertar(Request $request){
         $formulario['mail_entrenador'] = $input['mail_entrenador'];
 
         $formulario['telefono_entrenador'] = $input['telefono_entrenador'];
+
+        $formulario['participantes'] = '{}';
 
         $formulario->save();
 
