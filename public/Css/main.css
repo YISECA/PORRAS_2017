@@ -33,6 +33,9 @@
                 display: inline-block;
 		width: 90%;
             }
+.alert-info {
+    font-size: 17px;
+}
             
 #loading {
   width: 100%;
