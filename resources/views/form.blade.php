@@ -142,8 +142,8 @@
 			<thead>
 				<th>Cedula</td>
 				<th>Fecha nacimiento</td>
-				<th>Nombre</td>
-				<th>Apellido</th>
+				<th>Nombres</td>
+				<th>Apellidos</th>
 				<th>Eliminar</td>
 			</thead>
 			<tbody>
