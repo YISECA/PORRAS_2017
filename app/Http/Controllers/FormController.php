@@ -150,10 +150,268 @@ public function validar_existe($cedula){
 
 }
 
+public function validar_edades($edad_tipo,$edad){
+switch($edad_tipo){
+    case 1: 
+    if($edad>8)  
+    {
+    return false;
+    //1	8 años y menores 
+    }
+    break;
+    case 2: 
+    if($edad>18)  
+    {
+    return false;
+    //2	18 años y menores
+    }
+    break;
+
+    case 3: 
+    if($edad>11) 
+    {
+    return false;
+    //3	11 años y menores
+    }
+    break;
+
+    case 4: 
+    if($edad>11)  
+    {
+    return false;
+    //4	11 años y menores
+    }
+    break;
+    case 5: 
+    if($edad>14)  
+    {
+    return false;
+    //5	14 años y menores
+    }
+    break;
+    case 6: 
+    if($edad>14)  
+    {
+    return false;
+    //6	14 años y menores
+    }
+    break;
+    case 7: 
+    if($edad>18 || $edad<10)  
+    {
+    return false;
+    //7	10 a 18 años
+    }
+    break;
+    case 8: 
+    if($edad>18 || $edad<10) 
+    {
+    return false;
+    //8	10 a 18 años
+    }
+    break;
+    case 9: 
+    if($edad>18 || $edad<10) 
+    {
+    return false;
+    //9	10 a 18 años
+    }
+    break;
+    case 10: 
+    if($edad>18 || $edad<10) 
+    {
+    return false;
+    //10	10 a 18 años
+    }
+    break;
+    case 11: 
+    if($edad<15) 
+    {
+    return false;
+    //11	15 años en adelante
+    }
+    break;
+    case 12: 
+    if($edad>8) 
+    {
+    return false;
+    //12	8 años y menores
+    }
+    break;
+    case 13: 
+    if($edad>11) 
+    {
+    return false;
+    //13	11 años y menores
+    }
+    break;
+    case 14: 
+    if($edad>11) 
+    {
+    return false;
+    //14	11 años y menores
+    }
+    break;
+    case 15: 
+    if($edad>14) 
+    {
+    return false;
+    //15	14 años y menores
+    }
+    break;
+    case 16: 
+    if($edad>14) 
+    {
+    return false;
+    //16	14 años y menores
+    }
+    break;
+    case 17: 
+    if($edad>18 || $edad<10) 
+    {
+    return false;
+    //17	10 a 18 años
+    }
+    break;
+    case 18: 
+    if($edad>18 || $edad<10) 
+    {
+    return false;
+    //18	10 a 18 años
+    }
+    break;
+    case 19: 
+    if($edad>18 || $edad<10) 
+    {
+    return false;
+    //19	10 a 18 años
+    }
+    break;
+    case 20: 
+    if($edad>18 || $edad<10) 
+    {
+    return false;
+    //20	10 a 18 años
+    }
+    break;
+    case 21: 
+    if($edad<13) 
+    {
+    return false;
+    //21	13 años en adelante
+    }
+    break;
+    case 22: 
+    if($edad<13) 
+    {
+    return false;
+    //22	13 años en adelante
+    }
+    break;
+    case 23: 
+    if($edad<13) 
+    {
+    return false;
+    //23	13 años en adelante
+    }
+    break;
+    case 24: 
+    if($edad<13) 
+    {
+    return false;
+    //24	13 años en adelante
+    }
+    break;
+    case 25: 
+    if($edad<14) 
+    {
+    return false;
+    //25	14 años en adelante
+    }
+    break;
+    case 26: 
+    if($edad<14) 
+    {
+    return false;
+    //26	14 años en adelante
+    }
+    break;
+    case 27: 
+    if($edad<15) 
+    {
+    return false;
+    //27	15 años en adelante
+    }
+    break;
+    case 28: 
+    if($edad<15) 
+    {
+    return false;
+    //28	15 años en adelante
+    }
+    break;
+    case 29: 
+    if($edad<13) 
+    {
+    return false;
+    //29	13 años en adelante
+    }
+    break;
+
+    case 30: 
+    if($edad<13) 
+    {
+    return false ;
+    //31	13 años en adelante
+    }
+    break;
+    case 31: 
+    if($edad<14) 
+    {
+    return false ;
+    //33	14 años en adelante
+    }
+    break;
+    case 32: 
+    if($edad<14) 
+    {
+    return false;
+    //34	14 años en adelante
+    }
+    break;
+    case 33: 
+    if($edad<15) 
+    {
+    return false;
+    //35	15 años en adelante
+    }
+    break;
+    case 34: 
+    if($edad<13) 
+    {
+    return false;
+    //30	13 años en adelante
+    }
+    break;
+    case 35: 
+    if($edad<13) 
+    {
+    return false;
+    //32	13 años en adelante
+    }
+    break;
+    }
+return true;
+}
+
 public function  insertar_persona(Request $request){
+    $form = Form::find($request->id);
+    $edad = $request->TX_Ed;
+    if(!$this->validar_edades($form->edad,$edad)){
+       $_SESSION['estado'] = 'La edad del participante no cumple con esta categoria';  return redirect('insertar_participante');
+    }
 
     if(!$this->validar_existe($request->cedula)){
-        $form = Form::find($request->id);
         (empty($form->participantes))? $actuales=array():$actuales=json_decode($form->participantes, true);
         $actuales[$request->cedula] = [
           'tipo_documento' => $request->tipo_documento ,
@@ -193,6 +451,9 @@ public function eliminar_participante (Request $request){
 public function insertar_participante(Request $request){
 
     $id_equipo = (empty($request->equipo))?$_SESSION['equipo']:$request->equipo;
+    if(empty($_SESSION['equipo'])){
+    $_SESSION['equipo']=$request->equipo;
+    }
     $form = Form::with('rangoEdad')->find($id_equipo);
     $inscritos = (empty($form->participantes)) ? null : json_decode($form->participantes);
     $data = [
@@ -207,26 +468,26 @@ public function insertar_participante(Request $request){
 public function insertar(Request $request){
 
       $post = $request->input();
-     $usuario = Form::where('nombre_institucion', $request->input('nombre_institucion'))->first(); 
-      if (!empty($usuario)) { return view('error',['error' => 'Esta Institución o equipo ya fue registrado!'] ); exit(); }
+      $contador = Form::where('nombre_institucion', $request->input('nombre_institucion'))->count(); 
+      if ($contador>0) { return view('error',['error' => 'Esta Institución o equipo ya fue registrado!'] ); exit(); }
       $formulario = new Form([]);
 
         //envio de correo
 
-      if($this->inscritos()<=50){
+      if($this->inscritos()<=100){
 
-        if(empty($request->tipo_colegio)){
-           $request->request->add(['tipo_colegio' => 0]);
-        }
+          if(empty($request->tipo_colegio)){
+            $request->request->add(['tipo_colegio' => 0]);
+          }
 
-      $this->store($formulario, $request->input());
+          $this->store($formulario, $request->input());
 
-      $id = $formulario->id;
-      Mail::send('email', ['id' => $id], function ($m) use ($request) {
-      $m->from('no-reply@idrd.gov.co', 'Registro Exitoso a este evento');
-      $m->to($request->input('mail'), $request->input('nombre_institucion'))->subject('Registro Exitoso Torneo!');
+          $id = $formulario->id;
+          Mail::send('email', ['id' => $id], function ($m) use ($request) {
+          $m->from('no-reply@idrd.gov.co', 'Registro Exitoso a este evento');
+          $m->to($request->input('mail'), $request->input('nombre_institucion'))->subject('Registro Exitoso Torneo!');
 
-        });
+          });
 
       }else{
       return view('error', ['error' => 'Lo sentimos el limite de inscritos fue superado!']);
@@ -240,7 +501,7 @@ public function insertar(Request $request){
 
     //fin insertar
    
-// conteo de la tabla
+    // conteo de la tabla
 
     private function inscritos(){
 
