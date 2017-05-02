@@ -30,9 +30,8 @@ class MainController extends Controller {
 //torneos
 	public function index()
   	{
-
-  		
-		$data = ['torneos' => Torneos::get(),'localidades' => Localidad::get()];
+		$_SESSION['equipo']=null;
+		$data = ['torneos' => Torneos::get(),'localidades' => Localidad::get(),'estado' => ''];
 		return view('welcome', $data);
 	}
 
