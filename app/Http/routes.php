@@ -18,8 +18,8 @@ Route::post('traer_edades','MainController@traer_edades');
 
 
 Route::get('registro', function () {                
-
-    return view('form');
+    $data = ['estado' => ''];
+    return view('form',$data);
 
 });
 
