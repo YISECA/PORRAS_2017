@@ -1,5 +1,6 @@
 <?php
 	session_start();
+    
 Route::any('/','MainController@index');
 
 Route::post('traer_eventos','MainController@traer_eventos');
@@ -87,6 +88,8 @@ Route::any('listar_datos', 'FormController@listar_datos');
 Route::get('/personas/service/ciudad/{id_pais}', '\Idrd\Usuarios\Controllers\LocalizacionController@buscarCiudades');
 
 Route::post('/personas/service/procesar/', '\Idrd\Usuarios\Controllers\PersonaController@procesar');
+
+Route::any('eliminar_participante', 'FormController@eliminar_participante');
 
 Route::group(['middleware' => ['web']], function () {
 
