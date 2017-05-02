@@ -10,15 +10,18 @@
 
 
     <link rel="stylesheet" type="text/css" href="public/Css/form.css">
-
+	@if($estado!='')
+		<div class="alert alert-danger alert-dismissible">
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		<strong>Informacion!</strong> {{$estado}}
+		</div>
+	@endif
     
 
 	<form method="POST" action="insertar_persona" id="form_participante" enctype="multipart/form-data">
 
 
-
-	
-
+   
     <section id="page1">
 
     	<div class="panel panel-default">
@@ -26,8 +29,7 @@
   	<div class="panel-heading">
           <h4>Registrar Integrantes al Equipo  o Institución <span style="color:red"> {{$equipo->nombre_institucion}}</span> </h4> 
           <h4>Rango de edad de integrantes en esta categoría: <span style="color:red" id="rango">{{ $equipo->rangoEdad['edad'] }}</span></h4>
-          <h4 ># Participantes registrados en este Equipo O Institución : <span style="color:red" id="cuenta"></span></h4>
-    </div>
+ 	</div>
 
   	<div class="panel-body">
   	<div class="row">
@@ -136,15 +138,33 @@
 	<script type="text/javascript" src="public/Js/form.js" ></script>
 	<div class="row" >
 		<div class="col-md-12">
-			<table>
+			<table id="tabla-actuales">
+			<thead>
+				<th>Cedula</td>
+				<th>Fecha nacimiento</td>
+				<th>Nombre</td>
+				<th>Apellido</th>
+				<th>Eliminar</td>
+			</thead>
+			<tbody>
 		 	@foreach($inscritos as $inscrito)
 			 <tr>
 				 <td>
 					 <p>{{$inscrito->cedula}}</p>
 				 </td>
+				  <td>
+					 <p>{{$inscrito->fecha_nacimiento}}</p>
+				 </td>
+				  <td>
+					 <p>{{$inscrito->primer_nombre}}</p>
+				 </td>
+				 <td>
+					 <p>{{$inscrito->segundo_nombre}}</p>
+				 </td>
 				 <td><form action="eliminar_participante" method="post" ><input type="hidden" name="cedula" value="{{$inscrito->cedula}}"><input type="hidden" name="equipo" value="{{$equipo->id}}"> <input type="submit" id="eliminar"  value="eliminar"></form></td>
 			 </tr>
 			@endforeach
+			</tbody>
 			</table>
 		</div>
 	</div>
