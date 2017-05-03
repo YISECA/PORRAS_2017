@@ -18,7 +18,6 @@
 	@endif
     
 
-	<form method="POST" action="insertar_persona" id="form_participante" enctype="multipart/form-data">
 
 
    
@@ -27,16 +26,41 @@
     	<div class="panel panel-default">
 
   	<div class="panel-heading">
-          <h4>Registrar Integrantes al Equipo  o Institución <span style="color:red"> {{$equipo->nombre_institucion}}</span> </h4> 
+          <h4>Equipo: <span style="color:red"> {{$equipo->nombre_institucion}}</span> </h4> 
           <h4>Rango de edad de integrantes en esta categoría: <span style="color:red" id="rango">{{ $equipo->rangoEdad['edad'] }}</span></h4>
+			
  	</div>
 
   	<div class="panel-body">
+		<div class="row">
+			<div class="col-md-12">
+			<form method="POST" action="finalizar" id="form_equipo" enctype="multipart/form-data">
+					<input type="hidden" class="form-control" id="id_equipo" name="id_equipo" value="{{$equipo->id}}" >
+					<button type="submit" id="inscribir persona"  class="btn btn-success">Finalizar registro de equipo</button>
+			</form>
+			</div>
+		</div>
+	</div>
+	</section>
+
+	<section id="page1">
+
+	<div class="panel panel-default">
+
+  	<div class="panel-heading">
+          <h4><button data-toggle="collapse" data-target="#demo">Agregar participante nuevo</button></h4> 
+          
+ 	</div>
+	<div class="panel-body">
+
+	
+
+<div id="demo" class="collapse">
   	<div class="row">
-  	<br>
+
+	  <form method="POST" action="insertar_persona" id="form_participante" enctype="multipart/form-data">
 
 	<input type="hidden" class="form-control" id="id" name="id" value="{{$equipo->id}}" >
-
 
   	<div class="col-md-6"><label class="freebirdFormviewerViewItemsItemItemTitle" for="formGroupExampleInput2">Tipo de Documento <span style="color: red;font-size: 11px;text-transform: capitalize;color:red">(Campo Obligatorio)</span></label></div>
        <div class="col-md-6">
@@ -132,8 +156,10 @@
 
 <div class="form-group">
 <button type="submit" id="inscribir persona"  class="btn btn-info">Registrar participante en el grupo</button>
+
 </div>
 </form>
+</div>
 
 	<script type="text/javascript" src="public/Js/form.js" ></script>
 	<div class="row" >

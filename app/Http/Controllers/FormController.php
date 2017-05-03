@@ -404,9 +404,32 @@ switch($edad_tipo){
 return true;
 }
 
+public function finalizar(Request $request){
+
+    $form = Form::find($request->id_equipo);
+    $inscritos = json_decode($form->participantes,true);
+    $collection = collect($inscritos);
+    $actuales = $collection->count();
+     if($actuales<12){
+         $_SESSION['estado'] = 'el minimo son 12 participantes';  return redirect('insertar_participante');
+    }
+    $form->estado = 1;
+    $form->save();
+    return view('error',['error' => 'Equipo inscirto satisfactoriamente !'] ); exit(); 
+    
+}
+
 public function  insertar_persona(Request $request){
+    
     $form = Form::find($request->id);
+    $inscritos = json_decode($form->participantes,true);
+    $collection = collect($inscritos);
+    $actuales = $collection->count();
+    if($actuales>=36){
+         $_SESSION['estado'] = 'ya se cumplio el limite de participantes';  return redirect('insertar_participante');
+    }
     $edad = $request->TX_Ed;
+
     if(!$this->validar_edades($form->edad,$edad)){
        $_SESSION['estado'] = 'La edad del participante no cumple con esta categoria';  return redirect('insertar_participante');
     }
@@ -429,7 +452,9 @@ public function  insertar_persona(Request $request){
         $_SESSION['equipo'] = $request->id;
         $_SESSION['estado'] = null;
         return redirect('insertar_participante');
-    }else{ $_SESSION['estado'] = 'Ya fue registrado este participante en este u otro equipo.';  return redirect('insertar_participante');}
+    }else{ 
+        $_SESSION['estado'] = 'Ya fue registrado este participante en este u otro equipo.';  return redirect('insertar_participante');
+    }
     
 
 }

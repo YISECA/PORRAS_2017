@@ -13,6 +13,8 @@ Route::post('traer_modalidades','MainController@traer_modalidades');
 
 Route::post('traer_edades','MainController@traer_edades');
 
+Route::post('finalizar','FormController@finalizar');
+
 
 
 
