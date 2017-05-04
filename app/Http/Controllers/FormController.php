@@ -21,16 +21,16 @@ class FormController extends BaseController
    var $url;
 
    private function cifrar($M)
-    {   
+    {
 
       $C="";
-      $k = 18; 
+      $k = 18;
       for($i=0; $i<strlen($M); $i++)$C.=chr((ord($M[$i])+$k)%255);
       return $C;
     }
 
    private function decifrar($C)
-    {   
+    {
       $M="";
       $k = 18;
       for($i=0; $i<strlen($C); $i++)$M.=chr((ord($C[$i])-$k+255)%255);
@@ -39,7 +39,7 @@ class FormController extends BaseController
 
     public function listar_datos(){
 
-    $acceso = Form::whereYear('created_at', '=', date('Y'))->get(); 
+    $acceso = Form::whereYear('created_at', '=', date('Y'))->get();
 
     $tabla='<table id="lista">
 
@@ -69,7 +69,7 @@ class FormController extends BaseController
 
              <th style="text-transform: capitalize;">celular</th>
 
-             <th style="text-transform: capitalize;">eps</th>          
+             <th style="text-transform: capitalize;">eps</th>
 
             </tr>
 
@@ -77,10 +77,10 @@ class FormController extends BaseController
 
         <tbody id="tabla">';
 
-      foreach ($acceso as $key => $value) 
+      foreach ($acceso as $key => $value)
       {
 
-     
+
        $tabla.='<tr><td>'.$value->id.'</td>';
 
        $tabla.='<td>'.$value->cedula.'</td>';
@@ -111,7 +111,7 @@ class FormController extends BaseController
       echo $tabla;
     }
 
-  
+
 public function logear(Request $request){
 
 
@@ -120,11 +120,11 @@ public function logear(Request $request){
       $pass = $request->input('pass');
       $acceso = Acceso::where('Usuario',$usuario)->where('Contrasena', sha1($this->cifrar($pass)) )->first();
       if (empty($usuario)) { return view('error',['error' => 'Usuario o contraseña invalida!'] ); exit(); }
-      if (empty($acceso)) { return view('error',['error' => 'Usuario o contraseña invalida!'] ); exit(); }    
+      if (empty($acceso)) { return view('error',['error' => 'Usuario o contraseña invalida!'] ); exit(); }
       session_start() ;
 
       $_SESSION['id_usuario'] = json_encode($acceso);
-      return view('admin'); exit();       
+      return view('admin'); exit();
 
     }
 
@@ -139,262 +139,262 @@ public function validar_existe($cedula){
 
   $equipos = Form::get();
   foreach ($equipos as $equipo){
-       
+
        $inscritos = json_decode($equipo->participantes,true);
        $collection = collect($inscritos);
        if ($collection->has($cedula))
         return $collection->has($cedula);
 
-      
+
   }
 
 }
 
 public function validar_edades($edad_tipo,$edad){
 switch($edad_tipo){
-    case 1: 
-    if($edad>8)  
+    case 1:
+    if($edad>8)
     {
     return false;
-    //1	8 años y menores 
+    //1	8 años y menores
     }
     break;
-    case 2: 
-    if($edad>18)  
+    case 2:
+    if($edad>18)
     {
     return false;
     //2	18 años y menores
     }
     break;
 
-    case 3: 
-    if($edad>11) 
+    case 3:
+    if($edad>11)
     {
     return false;
     //3	11 años y menores
     }
     break;
 
-    case 4: 
-    if($edad>11)  
+    case 4:
+    if($edad>11)
     {
     return false;
     //4	11 años y menores
     }
     break;
-    case 5: 
-    if($edad>14)  
+    case 5:
+    if($edad>14)
     {
     return false;
     //5	14 años y menores
     }
     break;
-    case 6: 
-    if($edad>14)  
+    case 6:
+    if($edad>14)
     {
     return false;
     //6	14 años y menores
     }
     break;
-    case 7: 
-    if($edad>18 || $edad<10)  
+    case 7:
+    if($edad>18 || $edad<10)
     {
     return false;
     //7	10 a 18 años
     }
     break;
-    case 8: 
-    if($edad>18 || $edad<10) 
+    case 8:
+    if($edad>18 || $edad<10)
     {
     return false;
     //8	10 a 18 años
     }
     break;
-    case 9: 
-    if($edad>18 || $edad<10) 
+    case 9:
+    if($edad>18 || $edad<10)
     {
     return false;
     //9	10 a 18 años
     }
     break;
-    case 10: 
-    if($edad>18 || $edad<10) 
+    case 10:
+    if($edad>18 || $edad<10)
     {
     return false;
     //10	10 a 18 años
     }
     break;
-    case 11: 
-    if($edad<15) 
+    case 11:
+    if($edad<15)
     {
     return false;
     //11	15 años en adelante
     }
     break;
-    case 12: 
-    if($edad>8) 
+    case 12:
+    if($edad>8)
     {
     return false;
     //12	8 años y menores
     }
     break;
-    case 13: 
-    if($edad>11) 
+    case 13:
+    if($edad>11)
     {
     return false;
     //13	11 años y menores
     }
     break;
-    case 14: 
-    if($edad>11) 
+    case 14:
+    if($edad>11)
     {
     return false;
     //14	11 años y menores
     }
     break;
-    case 15: 
-    if($edad>14) 
+    case 15:
+    if($edad>14)
     {
     return false;
     //15	14 años y menores
     }
     break;
-    case 16: 
-    if($edad>14) 
+    case 16:
+    if($edad>14)
     {
     return false;
     //16	14 años y menores
     }
     break;
-    case 17: 
-    if($edad>18 || $edad<10) 
+    case 17:
+    if($edad>18 || $edad<10)
     {
     return false;
     //17	10 a 18 años
     }
     break;
-    case 18: 
-    if($edad>18 || $edad<10) 
+    case 18:
+    if($edad>18 || $edad<10)
     {
     return false;
     //18	10 a 18 años
     }
     break;
-    case 19: 
-    if($edad>18 || $edad<10) 
+    case 19:
+    if($edad>18 || $edad<10)
     {
     return false;
     //19	10 a 18 años
     }
     break;
-    case 20: 
-    if($edad>18 || $edad<10) 
+    case 20:
+    if($edad>18 || $edad<10)
     {
     return false;
     //20	10 a 18 años
     }
     break;
-    case 21: 
-    if($edad<13) 
+    case 21:
+    if($edad<13)
     {
     return false;
     //21	13 años en adelante
     }
     break;
-    case 22: 
-    if($edad<13) 
+    case 22:
+    if($edad<13)
     {
     return false;
     //22	13 años en adelante
     }
     break;
-    case 23: 
-    if($edad<13) 
+    case 23:
+    if($edad<13)
     {
     return false;
     //23	13 años en adelante
     }
     break;
-    case 24: 
-    if($edad<13) 
+    case 24:
+    if($edad<13)
     {
     return false;
     //24	13 años en adelante
     }
     break;
-    case 25: 
-    if($edad<14) 
+    case 25:
+    if($edad<14)
     {
     return false;
     //25	14 años en adelante
     }
     break;
-    case 26: 
-    if($edad<14) 
+    case 26:
+    if($edad<14)
     {
     return false;
     //26	14 años en adelante
     }
     break;
-    case 27: 
-    if($edad<15) 
+    case 27:
+    if($edad<15)
     {
     return false;
     //27	15 años en adelante
     }
     break;
-    case 28: 
-    if($edad<15) 
+    case 28:
+    if($edad<15)
     {
     return false;
     //28	15 años en adelante
     }
     break;
-    case 29: 
-    if($edad<13) 
+    case 29:
+    if($edad<13)
     {
     return false;
     //29	13 años en adelante
     }
     break;
 
-    case 30: 
-    if($edad<13) 
+    case 30:
+    if($edad<13)
     {
     return false ;
     //31	13 años en adelante
     }
     break;
-    case 31: 
-    if($edad<14) 
+    case 31:
+    if($edad<14)
     {
     return false ;
     //33	14 años en adelante
     }
     break;
-    case 32: 
-    if($edad<14) 
+    case 32:
+    if($edad<14)
     {
     return false;
     //34	14 años en adelante
     }
     break;
-    case 33: 
-    if($edad<15) 
+    case 33:
+    if($edad<15)
     {
     return false;
     //35	15 años en adelante
     }
     break;
-    case 34: 
-    if($edad<13) 
+    case 34:
+    if($edad<13)
     {
     return false;
     //30	13 años en adelante
     }
     break;
-    case 35: 
-    if($edad<13) 
+    case 35:
+    if($edad<13)
     {
     return false;
     //32	13 años en adelante
@@ -410,17 +410,19 @@ public function finalizar(Request $request){
     $inscritos = json_decode($form->participantes,true);
     $collection = collect($inscritos);
     $actuales = $collection->count();
-     if($actuales<12){
+    if($actuales<12){
          $_SESSION['estado'] = 'el minimo son 12 participantes';  return redirect('insertar_participante');
+         $form->estado = 0;
+         $form->save();
     }
     $form->estado = 1;
     $form->save();
-    return view('error',['error' => 'Equipo inscirto satisfactoriamente !'] ); exit(); 
-    
+    return view('error',['error' => 'Equipo inscirto satisfactoriamente !'] ); exit();
+
 }
 
 public function  insertar_persona(Request $request){
-    
+
     $form = Form::find($request->id);
     $inscritos = json_decode($form->participantes,true);
     $collection = collect($inscritos);
@@ -452,10 +454,10 @@ public function  insertar_persona(Request $request){
         $_SESSION['equipo'] = $request->id;
         $_SESSION['estado'] = null;
         return redirect('insertar_participante');
-    }else{ 
+    }else{
         $_SESSION['estado'] = 'Ya fue registrado este participante en este u otro equipo.';  return redirect('insertar_participante');
     }
-    
+
 
 }
 
@@ -493,7 +495,7 @@ public function insertar_participante(Request $request){
 public function insertar(Request $request){
 
       $post = $request->input();
-      $contador = Form::where('nombre_institucion', $request->input('nombre_institucion'))->count(); 
+      $contador = Form::where('nombre_institucion', $request->input('nombre_institucion'))->count();
       if ($contador>0) { return view('error',['error' => 'Esta Institución o equipo ya fue registrado!'] ); exit(); }
       $formulario = new Form([]);
 
@@ -525,7 +527,7 @@ public function insertar(Request $request){
 
 
     //fin insertar
-   
+
     // conteo de la tabla
 
     private function inscritos(){
@@ -589,9 +591,8 @@ public function insertar(Request $request){
 
         return $formulario;
 
-        
+
 
     }
 
 }
-
