@@ -579,8 +579,6 @@ public function insertar(Request $request){
 
         $formulario['cedula_entrenador'] = $input['cedula_entrenador'];
 
-        $formulario['mail_entrenador'] = $input['mail_entrenador'];
-
         $formulario['telefono_entrenador'] = $input['telefono_entrenador'];
 
         $formulario['participantes'] = '{}';

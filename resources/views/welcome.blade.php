@@ -280,14 +280,8 @@
            <div class="col-md-6"><input required type="text" class="form-control" id="entrenador" name="entrenador" ></div>
              <div class="col-md-6"><input required type="number" class="form-control" id="cedula_entrenador" name="cedula_entrenador"><br></div>
 
-             <div class="col-md-6"><label class="freebirdFormviewerViewItemsItemItemTitle" for="formGroupExampleInput2">
-
-            Correo Electrónico del entrenador <span style="color: red;font-size: 15px;text-transform: capitalize;color:red">*</span>
-
-            </label>
-
-
-            </div>
+            
+            
             <div class="col-md-6"><label class="freebirdFormviewerViewItemsItemItemTitle" for="formGroupExampleInput2">
 
             Número de Celular del entrenado<span style="color: red;font-size: 15px;text-transform: capitalize;color:red">*</span>
@@ -298,7 +292,7 @@
             </div>
 
 
-           <div class="col-md-6"><input required type="mail" class="form-control" id="mail_entrenador" name="mail_entrenador" ></div>
+
              <div class="col-md-6"><input required type="number" class="form-control" id="telefono_entrenador" name="telefono_entrenador"></div>
 
 
