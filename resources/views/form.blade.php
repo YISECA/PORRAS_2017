@@ -1,19 +1,22 @@
 @extends('master')                              
 @section('script')
 @parent
-   <script src="{{ asset('public/Js/ingresar_participantes.js') }}"></script>
+   <script src="{{ asset('public/Js/ingresar_participantes.js?n=1') }}"></script>
 @stop
 
 
 @section('content') 
-
+@if(empty($equipo->rangoEdad['edad']))
+<?php echo "<h4>Se cumplio el tiempo de 24 para el registro mínimo de 12 participantes</h4>"?>
+{{exit()}}
+@endif
 
 
     <link rel="stylesheet" type="text/css" href="public/Css/form.css">
 	@if($estado!='')
 		<div class="alert alert-danger alert-dismissible">
 		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		<strong>Informacion!</strong> {{$estado}}
+		<strong>Información!</strong> {{$estado}}
 		</div>
 	@endif
     
@@ -26,7 +29,7 @@
     	<div class="panel panel-default">
 
   	<div class="panel-heading">
-          <h4>Equipo: <span style="color:red"> {{$equipo->nombre_institucion}}</span> </h4> 
+          <h4>Equipo: <span style="color:red"> {{$equipo->nombre_institucion}}</span> </h4>
           <h4>Rango de edad de integrantes en esta categoría: <span style="color:red" id="rango">{{ $equipo->rangoEdad['edad'] }}</span></h4>
 			
  	</div>
@@ -36,7 +39,7 @@
 			<div class="col-md-12">
 			<form method="POST" action="finalizar" id="form_equipo" enctype="multipart/form-data">
 					<input type="hidden" class="form-control" id="id_equipo" name="id_equipo" value="{{$equipo->id}}" >
-					<button type="submit" id="inscribir persona"  class="btn btn-success">Finalizar registro de equipo</button>
+					<button type="submit" id="inscribir persona"  class="btn btn-success">Finalizar registro de equipo</button> <a  class="btn btn-info" target="_blank" href="ficha?equipo={{$equipo->id}}">Imprimir ficha</a>
 			</form>
 			</div>
 		</div>
@@ -84,7 +87,7 @@
 
 			<label class="freebirdFormviewerViewItemsPagebreakDescriptionText" style="font-size:11px">
 
-			Diligenciar en MAYÚSCULA y tal cual como aparece en el documento de identidad
+			
 
 			</label>
        </div>
@@ -92,7 +95,7 @@
 
 			<label class="freebirdFormviewerViewItemsPagebreakDescriptionText" style="font-size:11px">
 
-			Diligenciar en MAYÚSCULA y tal cual como aparece en el documento de identidad
+			
 
 			</label></div>
 
@@ -108,7 +111,6 @@
 
 			<label class="freebirdFormviewerViewItemsPagebreakDescriptionText" style="font-size:11px">
 
-			Diligenciar en MAYÚSCULA y tal cual como aparece en el documento de identidad
 
 			</label>
        </div>
@@ -116,7 +118,7 @@
 
 			<label class="freebirdFormviewerViewItemsPagebreakDescriptionText" style="font-size:11px">
 
-			Diligenciar en MAYÚSCULA y tal cual como aparece en el documento de identidad
+			
 
 			</label></div>
 
@@ -133,7 +135,6 @@
 
 			<label class="freebirdFormviewerViewItemsPagebreakDescriptionText" style="font-size:11px">
 
-			Seleccione su teléfono
 
 			</label></div>
        <div class="col-md-6"><label class="freebirdFormviewerViewItemsItemItemTitle" for="formGroupExampleInput2">
@@ -144,7 +145,7 @@
 
 			<label class="freebirdFormviewerViewItemsPagebreakDescriptionText" style="font-size:11px">
 
-			Seleccione de acuerdo a la fecha de su nacimiento
+			
 
 			</label>
 </div>
@@ -161,12 +162,12 @@
 </form>
 </div>
 
-	<script type="text/javascript" src="public/Js/form.js" ></script>
+	<script type="text/javascript" src="public/Js/form.js?n=3" ></script>
 	<div class="row" >
 		<div class="col-md-12">
-			<table id="tabla-actuales">
+			<table id="tabla-actuales2">
 			<thead>
-				<th>Cedula</td>
+				<th>Cédula</td>
 				<th>Fecha nacimiento</td>
 				<th>Nombres</td>
 				<th>Apellidos</th>

@@ -61,9 +61,9 @@ class LimpiarEquipos extends Command
 
             $lengthOfAd = $end_date->diffInHours($now);
 
-            echo $lengthOfAd;
-            if($lengthOfAd>12){
-               $equipo->delete();
+            //echo $lengthOfAd;
+            if($lengthOfAd>32){
+               //$equipo->delete();
             }
         }
        

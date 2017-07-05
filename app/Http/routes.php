@@ -43,7 +43,7 @@ Route::get('carnet_prueba', function () {
 
 
 
-Route::get('login', function () {                
+Route::get('login', function () {
 
     return view('login');
 
@@ -63,7 +63,7 @@ Route::get('cerrar', function () {
 
 
 
-
+Route::any('ficha','FormController@ficha');
 
 Route::any('logear','FormController@logear');
 
@@ -93,9 +93,10 @@ Route::post('/personas/service/procesar/', '\Idrd\Usuarios\Controllers\PersonaCo
 
 Route::any('eliminar_participante', 'FormController@eliminar_participante');
 
+Route::any('eliminar_equipo', 'FormController@eliminar_equipo');
+
 Route::group(['middleware' => ['web']], function () {
 
-    //
 
 });
 

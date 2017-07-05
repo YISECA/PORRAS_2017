@@ -37,40 +37,25 @@ class FormController extends BaseController
       return $M;
     }
 
+
     public function listar_datos(){
-
-    $acceso = Form::whereYear('created_at', '=', date('Y'))->get();
-
+    $i=1;
+    $acceso = DB::table('V_reporte')->get();
     $tabla='<table id="lista">
 
         <thead>
-
            <tr>
-
-             <th style="text-transform: capitalize;">id</th>
-
-             <th style="text-transform: capitalize;">cedula</th>
-
-             <th style="text-transform: capitalize;">tipo_documento</th>
-
-             <th style="text-transform: capitalize;">primer_nombre</th>
-
-             <th style="text-transform: capitalize;">segundo_nombre</th>
-
-             <th style="text-transform: capitalize;">primer_apellido</th>
-
-             <th style="text-transform: capitalize;">segundo_apellido</th>
-
-             <th style="text-transform: capitalize;">genero</th>
-
-             <th style="text-transform: capitalize;">fecha_nacimiento</th>
-
-             <th style="text-transform: capitalize;">mail</th>
-
-             <th style="text-transform: capitalize;">celular</th>
-
-             <th style="text-transform: capitalize;">eps</th>
-
+               <th style="text-transform: capitalize;"> # </th>
+               <th style="text-transform: capitalize;"> torneo </th>
+               <th style="text-transform: capitalize;"> evento </th>
+               <th style="text-transform: capitalize;"> nivel </th>
+               <th style="text-transform: capitalize;"> categoria </th>
+               <th style="text-transform: capitalize;"> modalidad </th>
+               <th style="text-transform: capitalize;"> edad </th>
+               <th style="text-transform: capitalize;"> nombre_institucion </th>
+               <th style="text-transform: capitalize;"> Estado </th>
+               <th style="text-transform: capitalize;"> Ver ficha </th>
+                <th style="text-transform: capitalize;"> Elimnar </th>
             </tr>
 
         </thead>
@@ -79,38 +64,38 @@ class FormController extends BaseController
 
       foreach ($acceso as $key => $value)
       {
-
-
-       $tabla.='<tr><td>'.$value->id.'</td>';
-
-       $tabla.='<td>'.$value->cedula.'</td>';
-
-       $tabla.='<td>'.$value->tipo_documento.'</td>';
-
-       $tabla.='<td>'.$value->primer_nombre.'</td>';
-
-       $tabla.='<td>'.$value->segundo_nombre.'</td>';
-
-       $tabla.='<td>'.$value->primer_apellido.'</td>';
-
-       $tabla.='<td>'.$value->segundo_apellido.'</td>';
-
-       $tabla.='<td>'.$value->genero.'</td>';
-
-       $tabla.='<td>'.$value->fecha_nacimiento.'</td>';
-
-       $tabla.='<td>'.$value->mail.'</td>';
-
-       $tabla.='<td>'.$value->celular.'</td>';
-
-       $tabla.='<td>'.$value->eps.'</td></tr>';
-
+        
+                $tabla.='<tr><td>'. $i.'</td>';
+                $tabla.='<td>'.$value->torneo.'</td>';
+                $tabla.='<td>'.$value->evento.'</td>';
+                $tabla.='<td>'.$value->nivel.'</td>';
+                $tabla.='<td>'.$value->categoria.'</td>';
+                $tabla.='<td>'.$value->modalidad.'</td>';
+                $tabla.='<td>'.$value->edad.'</td>';
+                $tabla.='<td>'.$value->nombre_institucion.'</td>';
+                $tabla.='<td>'.(($value->estado ==1 )?'completo':'incompleto').'</td>';
+                $tabla.='<td><a target="_blank" href="ficha?equipo='.$value->id.'">ver ficha</a></td>';
+                $tabla.='<td><form action="eliminar_equipo" id="form_eliminar">'.(($value->estado ==0 )?'<input type="hidden" value="'.$value->id.'" name="id_equipo"><input type="submit" value="Eliminar" >':'').'</form></td></tr>';
+                $i++;
       }
 
       $tabla.='</tbody></table>';
       echo $tabla;
+      exit();
     }
+    public function eliminar_equipo(Request $request){
 
+
+
+        $id_equipo = $request->input('id_equipo');
+
+        Form::where(['id'=>$id_equipo,'estado'=>0])->delete();
+
+        echo 1;
+
+        exit();
+
+    }
 
 public function logear(Request $request){
 
@@ -121,7 +106,6 @@ public function logear(Request $request){
       $acceso = Acceso::where('Usuario',$usuario)->where('Contrasena', sha1($this->cifrar($pass)) )->first();
       if (empty($usuario)) { return view('error',['error' => 'Usuario o contraseña invalida!'] ); exit(); }
       if (empty($acceso)) { return view('error',['error' => 'Usuario o contraseña invalida!'] ); exit(); }
-      session_start() ;
 
       $_SESSION['id_usuario'] = json_encode($acceso);
       return view('admin'); exit();
@@ -135,8 +119,24 @@ public function logear(Request $request){
      return( date("md") < $m.$d ? date("Y")-$Y-1 : date("Y")-$Y );
     }
 
-public function validar_existe($cedula){
+    public function ficha(Request $request){
 
+        if(!empty($request->input('equipo')) ){
+            $id_equipo = $request->input('equipo');
+            $equipo =  DB::table('V_reporte')->where('id',$id_equipo)->get();
+            if(empty($equipo[0]->participantes)){echo '<h4>el mínimo son 12 participantes para que pueda generar la ficha!</h4>';exit();}
+            $inscritos = json_decode($equipo[0]->participantes);
+            $datos = ['equipo'=>$equipo[0], 'inscritos'=>$inscritos];
+            return view('ficha',$datos);
+            exit();
+        }
+
+    }
+
+
+
+public function validar_existe($cedula){
+/*
   $equipos = Form::get();
   foreach ($equipos as $equipo){
 
@@ -146,7 +146,8 @@ public function validar_existe($cedula){
         return $collection->has($cedula);
 
 
-  }
+  }*/
+  return false;
 
 }
 
@@ -411,7 +412,7 @@ public function finalizar(Request $request){
     $collection = collect($inscritos);
     $actuales = $collection->count();
     if($actuales<12){
-         $_SESSION['estado'] = 'el minimo son 12 participantes';  return redirect('insertar_participante');
+         $_SESSION['estado'] = 'el mínimo son 12 participantes';  return redirect('insertar_participante');
          $form->estado = 0;
          $form->save();
     }
@@ -501,7 +502,7 @@ public function insertar(Request $request){
 
         //envio de correo
 
-      if($this->inscritos()<=100){
+      if($this->inscritos()<=110){
 
           if(empty($request->tipo_colegio)){
             $request->request->add(['tipo_colegio' => 0]);

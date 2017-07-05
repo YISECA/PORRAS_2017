@@ -51,7 +51,7 @@ function calcularEdad()
 
         // cogemos los valores actuales
 
-        var fecha_hoy = new Date('2016-08-06');
+        var fecha_hoy = new Date();
         var ahora_ano = fecha_hoy.getYear();
         var ahora_mes = fecha_hoy.getMonth()+1;
         var ahora_dia = fecha_hoy.getDate();

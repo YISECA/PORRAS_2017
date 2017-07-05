@@ -1,7 +1,7 @@
 jQuery(document).ready(function($) {
 
 
-var tabla_inscritos = $('#tabla-actuales').DataTable();
+var tabla_inscritos = $('#tabla-actuales2').dataTable({pageLength: 50});
 
 
 $('#fecha_nacimiento').datepicker({dateFormat: 'yy-mm-dd',changeMonth: true,changeYear: true,yearRange: "-100:+0"});
