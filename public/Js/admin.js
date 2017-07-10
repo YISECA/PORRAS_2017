@@ -30,25 +30,29 @@ $(function() {
     }
     cargar();
 
-    $('body').delegate("#form_eliminar","click",function(e)
+    $('body').delegate("#form_eliminar","submit",function(e)
     {
 
-        var formObj = $(this);
-        var formURL = formObj.attr("action");
-        var formData = new FormData(this);
-        $.ajax({
-            url: formURL,
-            type: 'POST',
-            data:  formData,
-            mimeType:"multipart/form-data",
-            contentType: false,
-            cache: false,
-            processData:false,
-            success: function(data, textStatus, jqXHR)
-            {
-                cargar();
-            }
-        });
+        if (confirm("Realmente deseas eliminar el equipo?")){
+
+            var formObj = $(this);
+            var formURL = formObj.attr("action");
+            var formData = new FormData(this);
+            $.ajax({
+                url: formURL,
+                type: 'POST',
+                data:  formData,
+                mimeType:"multipart/form-data",
+                contentType: false,
+                cache: false,
+                processData:false,
+                success: function(data, textStatus, jqXHR)
+                {
+                    cargar();
+                }
+            });
+        }
+
         e.preventDefault();
     });
 

@@ -75,7 +75,7 @@ class FormController extends BaseController
                 $tabla.='<td>'.$value->nombre_institucion.'</td>';
                 $tabla.='<td>'.(($value->estado ==1 )?'completo':'incompleto').'</td>';
                 $tabla.='<td><a target="_blank" href="ficha?equipo='.$value->id.'">ver ficha</a></td>';
-                $tabla.='<td><form action="eliminar_equipo" id="form_eliminar">'.(($value->estado ==0 )?'<input type="hidden" value="'.$value->id.'" name="id_equipo"><input type="submit" value="Eliminar" >':'').'</form></td></tr>';
+                $tabla.='<td><form  action="eliminar_equipo" id="form_eliminar"><input type="hidden" value="'.$value->id.'" name="id_equipo"><input type="submit" value="Eliminar" ></form></td></tr>';
                 $i++;
       }
 
@@ -89,7 +89,7 @@ class FormController extends BaseController
 
         $id_equipo = $request->input('id_equipo');
 
-        Form::where(['id'=>$id_equipo,'estado'=>0])->delete();
+        Form::where(['id'=>$id_equipo])->delete();
 
         echo 1;
 

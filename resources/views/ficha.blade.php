@@ -33,7 +33,7 @@
         </tr>
         <tr>
             <td colspan="2"> <div align="left"> <font size="3" color="#000000"> <label><font style="font-family: monospace" size="5" color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nivel:</font></label><font style="font-family: monospace" size="5" color="#000000"> </font> </font></div></td>
-            <td width="24%"><div align="left"><font style="font-family: monospace" face="Comic Sans MS, cursive" size="5" color="#000000">4</font></div></td>
+            <td width="24%"><div align="left"><font style="font-family: monospace" face="Comic Sans MS, cursive" size="5" color="#000000">{{$equipo->nivel}}</font></div></td>
 
             <td width="24%"><div align="left"> <font size="3" color="#000000"><label><font style="font-family: monospace" size="5" color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;Categoría:</font></label> </font></div></td>
             <td width="24%"><div align="left"><font style="font-family: monospace" face="Comic Sans MS, cursive" size="5" color="#000000">{{$equipo->categoria}}</font></div></td>
