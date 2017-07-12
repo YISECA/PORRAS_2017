@@ -38,7 +38,7 @@
 
 <script type="text/javascript" src="public/Js/admin.js?n=84" ></script>
   
-<link rel="stylesheet" href="{{ asset('public/Css/admin.css') }}" media="screen"> 
+<link rel="stylesheet" href="{{ asset('public/Css/admin.css?v=12') }}" media="screen">
 
        
 @stop
