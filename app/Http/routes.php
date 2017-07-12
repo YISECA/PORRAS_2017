@@ -87,6 +87,8 @@ Route::any('listar_departamento', 'FormController@listar_departamento');
 
 Route::any('listar_datos', 'FormController@listar_datos');
 
+Route::any('listar_integrantes', 'FormController@listar_integrantes');
+
 Route::get('/personas/service/ciudad/{id_pais}', '\Idrd\Usuarios\Controllers\LocalizacionController@buscarCiudades');
 
 Route::post('/personas/service/procesar/', '\Idrd\Usuarios\Controllers\PersonaController@procesar');

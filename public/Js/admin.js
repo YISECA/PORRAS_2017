@@ -27,6 +27,31 @@ $(function() {
           }
 
       });
+
+        $.ajax({url:'listar_integrantes',type:  'post',success:  function (response) {
+            $('#loading').show();
+            $('#div-tabla-participantes').html(response);
+        },complete: function(){
+
+            $('#lista').DataTable({"language": {"url": "//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json"
+            },
+                dom: 'Bfrtip',"bPaginate": false,
+
+                buttons: [
+                    'copyHtml5',
+                    'excelHtml5',
+                    'csvHtml5',
+                    'pdfHtml5'
+                ]
+
+
+            });
+            $('#loading').hide();
+
+
+        }
+
+        });
     }
     cargar();
 

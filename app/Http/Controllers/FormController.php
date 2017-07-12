@@ -38,6 +38,64 @@ class FormController extends BaseController
     }
 
 
+    public function listar_integrantes(){
+        $i=1;
+        $acceso = DB::table('V_reporte')->get();
+        $tabla='<table id="lista_participantes">
+
+        <thead>
+           <tr>
+               <th style="text-transform: capitalize;"> # </th>
+               <th style="text-transform: capitalize;"> torneo </th>
+               <th style="text-transform: capitalize;"> evento </th>
+               <th style="text-transform: capitalize;"> nivel </th>
+               <th style="text-transform: capitalize;"> categoria </th>
+               <th style="text-transform: capitalize;"> modalidad </th>
+               <th style="text-transform: capitalize;"> edad </th>
+               <th style="text-transform: capitalize;"> cedula </th>
+               <th style="text-transform: capitalize;"> fecha nacimiento </th>
+               <th style="text-transform: capitalize;"> nombres </th>
+               <th style="text-transform: capitalize;"> apellidos </th>
+               <th style="text-transform: capitalize;"> telefono </th>
+               <th style="text-transform: capitalize;"> eps </th>
+               <th style="text-transform: capitalize;"> Estado </th>
+               
+            </tr>
+
+        </thead>
+
+        <tbody id="tabla">';
+
+        foreach ($acceso as $key => $value)
+        {
+
+            $inscritos = json_decode($value->participantes);
+
+           foreach ($inscritos as $inscrito){
+                $tabla.='<tr><td>'. $i.'</td>';
+                $tabla.='<td>'.$value->torneo.'</td>';
+                $tabla.='<td>'.$value->evento.'</td>';
+                $tabla.='<td>'.$value->nivel.'</td>';
+                $tabla.='<td>'.$value->categoria.'</td>';
+                $tabla.='<td>'.$value->modalidad.'</td>';
+                $tabla.='<td>'.$value->edad.'</td>';
+                $tabla.='<td>'.$value->nombre_institucion.'</td>';
+                $tabla.='<td>'.$inscrito->cedula.'</td>';
+                $tabla.='<td>'.$inscrito->fecha_nacimiento.'</td>';
+                $tabla.='<td>'.$inscrito->primer_nombre.'</td>';
+                $tabla.='<td>'.$inscrito->segundo_nombre.'</td>';
+                $tabla.='<td>'.$inscrito->telefono.'</td>';
+                $tabla.='<td>'.$inscrito->eps.'</td>';
+                $tabla.='<td>'.(($value->estado ==1 )?'completo':'incompleto').'</td></tr>';
+                $i++;
+           }
+        }
+
+        $tabla.='</tbody></table>';
+        echo $tabla;
+        exit();
+    }
+
     public function listar_datos(){
     $i=1;
     $acceso = DB::table('V_reporte')->get();
@@ -64,7 +122,7 @@ class FormController extends BaseController
 
       foreach ($acceso as $key => $value)
       {
-        
+
                 $tabla.='<tr><td>'. $i.'</td>';
                 $tabla.='<td>'.$value->torneo.'</td>';
                 $tabla.='<td>'.$value->evento.'</td>';
