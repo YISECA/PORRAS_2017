@@ -1,5 +1,16 @@
 $(function() {
 
+
+    $('.uno').click(function(){
+        $('#keys').show();
+        $('#attrs').hide();
+
+    });
+    $('.dos').click(function(){
+        $('#keys').hide();
+        $('#attrs').show();
+    });
+
     function cargar() {
 
 
@@ -33,7 +44,7 @@ $(function() {
             $('#div-tabla-participantes').html(response);
         },complete: function(){
 
-            $('#lista').DataTable({"language": {"url": "//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json"
+            $('#lista_participantes').DataTable({"language": {"url": "//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json"
             },
                 dom: 'Bfrtip',"bPaginate": false,
 

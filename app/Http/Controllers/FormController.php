@@ -52,6 +52,7 @@ class FormController extends BaseController
                <th style="text-transform: capitalize;"> categoria </th>
                <th style="text-transform: capitalize;"> modalidad </th>
                <th style="text-transform: capitalize;"> edad </th>
+               <th style="text-transform: capitalize;"> institucion </th>
                <th style="text-transform: capitalize;"> cedula </th>
                <th style="text-transform: capitalize;"> fecha nacimiento </th>
                <th style="text-transform: capitalize;"> nombres </th>
