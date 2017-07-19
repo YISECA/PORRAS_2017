@@ -156,7 +156,7 @@ class EquipoController extends BaseController
                 $url_afiliacion_eps = $fileName;
             }
         } else {
-            $url_afiliacion_eps = '';
+                 $url_afiliacion_eps = '';
         }
 
         // obtener las personas actuales para sincronizarlas
@@ -220,7 +220,6 @@ class EquipoController extends BaseController
         $equipo = Equipo::with('personas')->find($request->input('id_equipo'));
         $equipo->personas()->detach();
         $equipo->delete();
-
         return redirect('/buscar')
                     ->with(['status' => 'success']);
     }

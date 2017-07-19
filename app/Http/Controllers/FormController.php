@@ -100,7 +100,7 @@ class FormController extends BaseController
     public function listar_datos(){
     $i=1;
     $acceso = DB::table('V_reporte')->get();
-    $tabla='<table id="lista">
+   $tabla='<table id="lista">
 
         <thead>
            <tr>
@@ -112,6 +112,9 @@ class FormController extends BaseController
                <th style="text-transform: capitalize;"> modalidad </th>
                <th style="text-transform: capitalize;"> edad </th>
                <th style="text-transform: capitalize;"> nombre_institucion </th>
+               <th style="text-transform: capitalize;"> telefono </th>
+               <th style="text-transform: capitalize;"> mail </th>
+               <th style="text-transform: capitalize;"> representante </th>
                <th style="text-transform: capitalize;"> Estado </th>
                <th style="text-transform: capitalize;"> Ver ficha </th>
                 <th style="text-transform: capitalize;"> Elimnar </th>
@@ -132,6 +135,9 @@ class FormController extends BaseController
                 $tabla.='<td>'.$value->modalidad.'</td>';
                 $tabla.='<td>'.$value->edad.'</td>';
                 $tabla.='<td>'.$value->nombre_institucion.'</td>';
+              $tabla.='<td>'.$value->telefono.'</td>';
+              $tabla.='<td>'.$value->mail.'</td>';
+              $tabla.='<td>'.$value->representante.'</td>';
                 $tabla.='<td>'.(($value->estado ==1 )?'completo':'incompleto').'</td>';
                 $tabla.='<td><a target="_blank" href="ficha?equipo='.$value->id.'">ver ficha</a></td>';
                 $tabla.='<td><form  action="eliminar_equipo" id="form_eliminar"><input type="hidden" value="'.$value->id.'" name="id_equipo"><input type="submit" value="Eliminar" ></form></td></tr>';
