@@ -7,7 +7,7 @@
   	<div class="panel-heading">Información personal</div>
   	<div class="panel-body">
     
-    <form action="logear" method="POST"> 
+    <form action="logear" method="POST">
 
 		<fieldset class="form-group">
 			<label class="freebirdFormviewerViewItemsItemItemTitle" for="formGroupExampleInput">Usuario</label>
@@ -20,7 +20,7 @@
 		</fieldset>
 
 		<fieldset class="form-group">
-	
+
 			<input type="submit" class="btn btn-success" value="Logear">
 		</fieldset>
 				

@@ -50,6 +50,13 @@ Route::get('login', function () {
 });
 
 
+Route::get('editar_equipo', function () {
+
+    return view('editar');
+
+});
+
+
 
 Route::get('cerrar', function () {      
 

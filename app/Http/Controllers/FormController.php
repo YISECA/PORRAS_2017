@@ -14,6 +14,7 @@ use Idrd\Usuarios\Repo\Ciudad;
 use Idrd\Usuarios\Repo\Localidad;
 use Idrd\Usuarios\Repo\Acceso;
 use Mail;
+use Crypt;
 class FormController extends BaseController
 
 {
@@ -119,7 +120,6 @@ class FormController extends BaseController
                <th style="text-transform: capitalize;"> Ver ficha </th>
                 <th style="text-transform: capitalize;"> Elimnar </th>
             </tr>
-
         </thead>
 
         <tbody id="tabla">';
@@ -489,7 +489,7 @@ public function finalizar(Request $request){
 
 public function  insertar_persona(Request $request){
 
-    $form = Form::find($request->id);
+    $form = Form::find(Crypt::decrypt($request->id));
     $inscritos = json_decode($form->participantes,true);
     $collection = collect($inscritos);
     $actuales = $collection->count();
@@ -517,7 +517,7 @@ public function  insertar_persona(Request $request){
 
         $form->participantes = json_encode($actuales);
         $form->save();
-        $_SESSION['equipo'] = $request->id;
+        $_SESSION['equipo'] = Crypt::decrypt($request->id);
         $_SESSION['estado'] = null;
         return redirect('insertar_participante');
     }else{
@@ -528,7 +528,7 @@ public function  insertar_persona(Request $request){
 }
 
 public function eliminar_participante (Request $request){
-    $_SESSION['equipo'] =$request->equipo;
+    $_SESSION['equipo'] = Crypt::decrypt($request->equipo);
     $cedula=$request->cedula;
     $id_equipo=$request->equipo;
     $form = Form::with('rangoEdad')->find($id_equipo);
@@ -543,9 +543,9 @@ public function eliminar_participante (Request $request){
 
 public function insertar_participante(Request $request){
 
-    $id_equipo = (empty($request->equipo))?$_SESSION['equipo']:$request->equipo;
+    $id_equipo = (empty($request->equipo))?$_SESSION['equipo']:Crypt::decrypt($request->equipo);
     if(empty($_SESSION['equipo'])){
-    $_SESSION['equipo']=$request->equipo;
+    $_SESSION['equipo']=Crypt::decrypt($request->equipo);
     }
     $form = Form::with('rangoEdad')->find($id_equipo);
     $inscritos = (empty($form->participantes)) ? null : json_decode($form->participantes);
@@ -572,22 +572,21 @@ public function insertar(Request $request){
           if(empty($request->tipo_colegio)){
             $request->request->add(['tipo_colegio' => 0]);
           }
-
           $this->store($formulario, $request->input());
-
           $id = $formulario->id;
-          Mail::send('email', ['id' => $id], function ($m) use ($request) {
-          $m->from('no-reply@idrd.gov.co', 'Registro Exitoso a este evento');
-          $m->to($request->input('mail'), $request->input('nombre_institucion'))->subject('Registro Exitoso Torneo!');
-
-          });
-
       }else{
       return view('error', ['error' => 'Lo sentimos el limite de inscritos fue superado!']);
 
       }
+     //$encrypted = Crypt::encryptString('Hello world.');
+
+     //$decrypted = Crypt::decrypt($encrypted);
+
+      $_SESSION['equipo']=$id;
+      return redirect('insertar_participante');
+      //return view('error', ['error' => 'Tu codigo de inscripcion es:']);
         //envio de correo
-        return view('error', ['error' => 'Registro insertado, por favor revise su correo para agregar los integrantes del equipo!']);
+        //return view('error', ['error' => 'Registro insertado, por favor revise su correo para agregar los integrantes del equipo!']);
     }
 
 

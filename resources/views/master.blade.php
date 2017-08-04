@@ -105,6 +105,7 @@
             <ul class="nav navbar-nav">
 
                <li><a href="cerrar" id="a-registro">Inicio</a></li>
+                <li><a href="editar_equipo" id="a-registro">Mi equipo</a></li>
 
                <!--<li><a href="registro" id="a-registro">Registrarse</a></li>-->
 

@@ -29,6 +29,7 @@
     	<div class="panel panel-default">
 
   	<div class="panel-heading">
+			<h4>Codigo Equipo necesario para volver a editar copialo en un lugar seguro: </h4><textarea readonly style="margin: 0px; width: 1118px; height: 79px;">{{Crypt::encrypt($equipo->id)}}</textarea>
           <h4>Equipo: <span style="color:red"> {{$equipo->nombre_institucion}}</span> </h4>
           <h4>Rango de edad de integrantes en esta categoría: <span style="color:red" id="rango">{{ $equipo->rangoEdad['edad'] }}</span></h4>
 			
@@ -38,8 +39,8 @@
 		<div class="row">
 			<div class="col-md-12">
 			<form method="POST" action="finalizar" id="form_equipo" enctype="multipart/form-data">
-					<input type="hidden" class="form-control" id="id_equipo" name="id_equipo" value="{{$equipo->id}}" >
-					<button type="submit" id="inscribir persona"  class="btn btn-success">Finalizar registro de equipo</button> <a  class="btn btn-info" target="_blank" href="ficha?equipo={{$equipo->id}}">Imprimir ficha</a>
+					<input type="hidden" class="form-control" id="id_equipo" name="id_equipo" value="{{Crypt::encrypt($equipo->id)}}" >
+					<button type="submit" id="inscribir persona"  class="btn btn-success">Finalizar registro de equipo</button> <a  class="btn btn-info" target="_blank" href="ficha?equipo={{Crypt::encrypt($equipo->id)}}">Imprimir ficha</a>
 			</form>
 			</div>
 		</div>
@@ -63,7 +64,7 @@
 
 	  <form method="POST" action="insertar_persona" id="form_participante" enctype="multipart/form-data">
 
-	<input type="hidden" class="form-control" id="id" name="id" value="{{$equipo->id}}" >
+	<input type="hidden" class="form-control" id="id" name="id" value="{{Crypt::encrypt($equipo->id)}}" >
 
   	<div class="col-md-6"><label class="freebirdFormviewerViewItemsItemItemTitle" for="formGroupExampleInput2">Tipo de Documento <span style="color: red;font-size: 11px;text-transform: capitalize;color:red">(Campo Obligatorio)</span></label></div>
        <div class="col-md-6">
@@ -188,7 +189,7 @@
 				 <td>
 					 <p>{{$inscrito->segundo_nombre}}</p>
 				 </td>
-				 <td><form action="eliminar_participante" method="post" ><input type="hidden" name="cedula" value="{{$inscrito->cedula}}"><input type="hidden" name="equipo" value="{{$equipo->id}}"> <input type="submit" id="eliminar"  value="eliminar"></form></td>
+				 <td><form action="eliminar_participante" method="post" ><input type="hidden" name="cedula" value="{{$inscrito->cedula}}"><input type="hidden" name="equipo" value="{{Crypt::encrypt($equipo->id)}}"> <input type="submit" id="eliminar"  value="eliminar"></form></td>
 			 </tr>
 			@endforeach
 			</tbody>
