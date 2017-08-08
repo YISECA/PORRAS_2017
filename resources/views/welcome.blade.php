@@ -10,7 +10,7 @@
 
 <div class="alert alert-danger alert-dismissable">
   <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-  <strong><font size="5">INFORMACIÓN IMPORTANTE!</font></strong> <font size="4">Después de registrar el equipo o institución educativa usted recibirá un email de confirmación y desde allí podrá registrar los participantes al equipo, además recuerde que debe registrar mínimo 12 participantes al equipo o este será eliminado automáticamente</font>
+  <strong><font size="5">INFORMACIÓN IMPORTANTE!</font></strong> <font size="4">Después de registrar el equipo copia el codigo en la secciona mi equipo podras usarlo para ingresar a tu equipo</font>
 </div>
 
 <section id="page1">
@@ -27,7 +27,7 @@
 
                     <div class="freebirdFormviewerViewHeaderTitleRow">
 
-                        <div class="freebirdFormviewerViewHeaderTitle" dir="auto" role="heading" aria-level="1"><font size="5" face="Comic Sans MS,arial,verdana">INSCRIPCIONES TORNEO DISTRITAL 20° FESTIVAL DE PORRAS IDRD, BOGOTÁ – 2017</font></div>
+                        <div class="freebirdFormviewerViewHeaderTitle" dir="auto" role="heading" aria-level="1"><font size="5" face="Comic Sans MS,arial,verdana">INSCRIPCIONES TORNEO DISTRITAL</font></div>
 
                     </div>
 <br>

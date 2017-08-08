@@ -13,7 +13,7 @@
 
                     <fieldset class="form-group">
                         <label class="freebirdFormviewerViewItemsItemItemTitle" for="formGroupExampleInput">codigo:</label>
-                        <textarea title="Se nesesita el codigo" required class="form-control" id="equipo" name="equipo" ></textarea>
+                        <textarea title="Se nesesita el codigo" required class="form-control" id="equipo" name="codigo" ></textarea>
                     </fieldset>
 
                     <fieldset class="form-group">

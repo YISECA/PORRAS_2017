@@ -472,24 +472,31 @@ return true;
 
 public function finalizar(Request $request){
 
-    $form = Form::find($request->id_equipo);
-    $inscritos = json_decode($form->participantes,true);
-    $collection = collect($inscritos);
-    $actuales = $collection->count();
-    if($actuales<12){
-         $_SESSION['estado'] = 'el mínimo son 12 participantes';  return redirect('insertar_participante');
-         $form->estado = 0;
-         $form->save();
-    }
-    $form->estado = 1;
-    $form->save();
-    return view('error',['error' => 'Equipo inscirto satisfactoriamente !'] ); exit();
+    if($this->inscritos()<=110) {
+        $form = Form::find(Crypt::decrypt($request->id_equipo));
+        $inscritos = json_decode($form->participantes, true);
+        $collection = collect($inscritos);
+        $actuales = $collection->count();
+        if ($actuales < 12) {
+            $_SESSION['estado'] = 'el mínimo son 12 participantes';
+            return redirect('insertar_participante');
+            $form->estado = 0;
+            $form->save();
+        }
+        $form->estado = 1;
+        $form->save();
+        return view('error', ['error' => 'Equipo inscrito satisfactoriamente !']);
+        exit();
+    }else{
 
+        return view('error', ['error' => 'Se cumplio el limite de equipos no se completo el equipo en el tiempo indicado!']);
+        exit();
+    }
 }
 
 public function  insertar_persona(Request $request){
 
-    $form = Form::find(Crypt::decrypt($request->id));
+    $form = Form::find(Crypt::decrypt($request->id_equipo));
     $inscritos = json_decode($form->participantes,true);
     $collection = collect($inscritos);
     $actuales = $collection->count();
@@ -517,7 +524,7 @@ public function  insertar_persona(Request $request){
 
         $form->participantes = json_encode($actuales);
         $form->save();
-        $_SESSION['equipo'] = Crypt::decrypt($request->id);
+        $_SESSION['equipo'] = Crypt::decrypt($request->id_equipo);
         $_SESSION['estado'] = null;
         return redirect('insertar_participante');
     }else{
@@ -530,7 +537,7 @@ public function  insertar_persona(Request $request){
 public function eliminar_participante (Request $request){
     $_SESSION['equipo'] = Crypt::decrypt($request->equipo);
     $cedula=$request->cedula;
-    $id_equipo=$request->equipo;
+    $id_equipo=Crypt::decrypt($request->equipo);
     $form = Form::with('rangoEdad')->find($id_equipo);
     $inscritos = json_decode($form->participantes,true);
     $collection = collect($inscritos);
@@ -543,14 +550,31 @@ public function eliminar_participante (Request $request){
 
 public function insertar_participante(Request $request){
 
-    $id_equipo = (empty($request->equipo))?$_SESSION['equipo']:Crypt::decrypt($request->equipo);
-    if(empty($_SESSION['equipo'])){
-    $_SESSION['equipo']=Crypt::decrypt($request->equipo);
+    if(!empty($request->codigo)){
+
+        $codigo = DB::table('v_codigos')->where(['codigo' => $request->codigo])->first();
+
+        $id_equipo = $codigo->id;
+        if(empty($_SESSION['equipo'])){
+            $_SESSION['equipo']= $codigo->id;
+        }
+    }else{
+        $id_equipo = (empty($request->equipo))?$_SESSION['equipo']:Crypt::decrypt($request->id_equipo);
+        $codigo = DB::table('v_codigos')->where(['id'=> $id_equipo])->first();
+
+        if(empty($_SESSION['equipo'])){
+            $_SESSION['equipo']=Crypt::decrypt($request->id_equipo);
+        }
     }
+
+
+
+
     $form = Form::with('rangoEdad')->find($id_equipo);
     $inscritos = (empty($form->participantes)) ? null : json_decode($form->participantes);
     $data = [
       'equipo' => $form,
+      'codigo' => $codigo->codigo,
       'inscritos' =>$inscritos,
       'estado' =>  (empty($_SESSION['estado']))?null:$_SESSION['estado']
     ];
