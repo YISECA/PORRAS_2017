@@ -6,7 +6,7 @@
 
 
 @section('content') 
-@if(empty($equipo->rangoEdad['edad']))
+@if(empty($equipo))
 <?php echo "<h4>Se cumplio el tiempo de 24 para el registro mínimo de 12 participantes</h4>"?>
 {{exit()}}
 @endif

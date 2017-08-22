@@ -106,6 +106,7 @@ class FormController extends BaseController
         <thead>
            <tr>
                <th style="text-transform: capitalize;"> # </th>
+               <th style="text-transform: capitalize;"> link </th>
                <th style="text-transform: capitalize;"> torneo </th>
                <th style="text-transform: capitalize;"> evento </th>
                <th style="text-transform: capitalize;"> nivel </th>
@@ -128,6 +129,7 @@ class FormController extends BaseController
       {
 
                 $tabla.='<tr><td>'. $i.'</td>';
+                $tabla.='<td><a  target="_blank" href="'.$value->link.'">editar</a></td>';
                 $tabla.='<td>'.$value->torneo.'</td>';
                 $tabla.='<td>'.$value->evento.'</td>';
                 $tabla.='<td>'.$value->nivel.'</td>';
@@ -496,7 +498,7 @@ public function finalizar(Request $request){
 
 public function  insertar_persona(Request $request){
 
-    $form = Form::find(Crypt::decrypt($request->id_equipo));
+    $form = Form::with('rangoEdad')->find(Crypt::decrypt($request->id_equipo));
     $inscritos = json_decode($form->participantes,true);
     $collection = collect($inscritos);
     $actuales = $collection->count();
