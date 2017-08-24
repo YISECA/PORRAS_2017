@@ -190,7 +190,7 @@ public function logear(Request $request){
 
         if(!empty($request->input('equipo')) ){
             $id_equipo = $request->input('equipo');
-            $equipo =  DB::table('V_reporte')->where('id',$id_equipo)->get();
+            $equipo =  DB::table('V_reporte')->where('id',Crypt::decrypt($id_equipo))->get();
             if(empty($equipo[0]->participantes)){echo '<h4>el mínimo son 12 participantes para que pueda generar la ficha!</h4>';exit();}
             $inscritos = json_decode($equipo[0]->participantes);
             $datos = ['equipo'=>$equipo[0], 'inscritos'=>$inscritos];
