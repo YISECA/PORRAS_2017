@@ -98,7 +98,7 @@
                     <option value="{{ $torneo->id }}">{{ $torneo->torneo}}</option>
                 @endforeach
             </select></div>
-             <div class="col-md-6"><select name="evento" id="evento" class="form-control" >
+             <div class="col-md-6"><select required name="evento" id="evento" class="form-control" >
                 <option value="" selected="selected">Seleccione</option>
 
             </select><br></div>
@@ -114,13 +114,13 @@
             </div>
 
 
-              <div class="col-md-6"><select name="nivel" id="nivel" class="form-control" >
+              <div class="col-md-6"><select required name="nivel" id="nivel" class="form-control" >
                   <option value="" selected="selected" >Seleccione</option>
 
             </select></div>
 
 
-              <div class="col-md-6"><select name="categoria" id="categoria" class="form-control" >
+              <div class="col-md-6"><select  required name="categoria" id="categoria" class="form-control" >
               <option value="">Seleccione</option>
 
             </select><br></div>
@@ -133,11 +133,11 @@
             </div>
 
 
-         <div class="col-md-6"><select name="modalidad" id="modalidad" class="form-control" >
+         <div class="col-md-6"><select required name="modalidad" id="modalidad" class="form-control" >
              <option value="">Seleccione</option>
          </select></div>
 
-          <div class="col-md-6"><select name="edad" id="edad" class="form-control" >
+          <div class="col-md-6"><select required name="edad" id="edad" class="form-control" >
            <option value="">Seleccione</option>
          </select><br></div>
 

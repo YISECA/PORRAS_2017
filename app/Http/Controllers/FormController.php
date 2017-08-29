@@ -141,7 +141,7 @@ class FormController extends BaseController
               $tabla.='<td>'.$value->mail.'</td>';
               $tabla.='<td>'.$value->representante.'</td>';
                 $tabla.='<td>'.(($value->estado ==1 )?'completo':'incompleto').'</td>';
-                $tabla.='<td><a target="_blank" href="ficha?equipo='.$value->id.'">ver ficha</a></td>';
+                $tabla.='<td><a target="_blank" href="ficha?equipo='.Crypt::encrypt($value->id).'">ver ficha</a></td>';
                 $tabla.='<td><form  action="eliminar_equipo" id="form_eliminar"><input type="hidden" value="'.$value->id.'" name="id_equipo"><input type="submit" value="Eliminar" ></form></td></tr>';
                 $i++;
       }
@@ -474,7 +474,7 @@ return true;
 
 public function finalizar(Request $request){
 
-    if($this->inscritos()<=110) {
+    if($this->inscritos()<=220) {
         $form = Form::find(Crypt::decrypt($request->id_equipo));
         $inscritos = json_decode($form->participantes, true);
         $collection = collect($inscritos);
@@ -593,7 +593,7 @@ public function insertar(Request $request){
 
         //envio de correo
 
-      if($this->inscritos()<=110){
+      if($this->inscritos()<=220){
 
           if(empty($request->tipo_colegio)){
             $request->request->add(['tipo_colegio' => 0]);
