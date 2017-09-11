@@ -106,6 +106,7 @@ class FormController extends BaseController
         <thead>
            <tr>
                <th style="text-transform: capitalize;"> # </th>
+               <th style="text-transform: capitalize;"> link </th>
                <th style="text-transform: capitalize;"> torneo </th>
                <th style="text-transform: capitalize;"> evento </th>
                <th style="text-transform: capitalize;"> nivel </th>
@@ -128,6 +129,7 @@ class FormController extends BaseController
       {
 
                 $tabla.='<tr><td>'. $i.'</td>';
+                $tabla.='<td><a  target="_blank" href="'.$value->link.'">editar</a></td>';
                 $tabla.='<td>'.$value->torneo.'</td>';
                 $tabla.='<td>'.$value->evento.'</td>';
                 $tabla.='<td>'.$value->nivel.'</td>';
@@ -139,7 +141,7 @@ class FormController extends BaseController
               $tabla.='<td>'.$value->mail.'</td>';
               $tabla.='<td>'.$value->representante.'</td>';
                 $tabla.='<td>'.(($value->estado ==1 )?'completo':'incompleto').'</td>';
-                $tabla.='<td><a target="_blank" href="ficha?equipo='.$value->id.'">ver ficha</a></td>';
+                $tabla.='<td><a target="_blank" href="ficha?equipo='.Crypt::encrypt($value->id).'">ver ficha</a></td>';
                 $tabla.='<td><form  action="eliminar_equipo" id="form_eliminar"><input type="hidden" value="'.$value->id.'" name="id_equipo"><input type="submit" value="Eliminar" ></form></td></tr>';
                 $i++;
       }
@@ -188,7 +190,7 @@ public function logear(Request $request){
 
         if(!empty($request->input('equipo')) ){
             $id_equipo = $request->input('equipo');
-            $equipo =  DB::table('V_reporte')->where('id',$id_equipo)->get();
+            $equipo =  DB::table('V_reporte')->where('id',Crypt::decrypt($id_equipo))->get();
             if(empty($equipo[0]->participantes)){echo '<h4>el mínimo son 12 participantes para que pueda generar la ficha!</h4>';exit();}
             $inscritos = json_decode($equipo[0]->participantes);
             $datos = ['equipo'=>$equipo[0], 'inscritos'=>$inscritos];
@@ -472,24 +474,31 @@ return true;
 
 public function finalizar(Request $request){
 
-    $form = Form::find($request->id_equipo);
-    $inscritos = json_decode($form->participantes,true);
-    $collection = collect($inscritos);
-    $actuales = $collection->count();
-    if($actuales<12){
-         $_SESSION['estado'] = 'el mínimo son 12 participantes';  return redirect('insertar_participante');
-         $form->estado = 0;
-         $form->save();
-    }
-    $form->estado = 1;
-    $form->save();
-    return view('error',['error' => 'Equipo inscirto satisfactoriamente !'] ); exit();
+    if($this->inscritos()<=225) {
+        $form = Form::find(Crypt::decrypt($request->id_equipo));
+        $inscritos = json_decode($form->participantes, true);
+        $collection = collect($inscritos);
+        $actuales = $collection->count();
+        if ($actuales < 12) {
+            $_SESSION['estado'] = 'el mínimo son 12 participantes';
+            return redirect('insertar_participante');
+            $form->estado = 0;
+            $form->save();
+        }
+        $form->estado = 1;
+        $form->save();
+        return view('error', ['error' => 'Equipo inscrito satisfactoriamente !']);
+        exit();
+    }else{
 
+        return view('error', ['error' => 'Se cumplio el limite de equipos no se completo el equipo en el tiempo indicado!']);
+        exit();
+    }
 }
 
 public function  insertar_persona(Request $request){
 
-    $form = Form::find(Crypt::decrypt($request->id));
+    $form = Form::with('rangoEdad')->find(Crypt::decrypt($request->id_equipo));
     $inscritos = json_decode($form->participantes,true);
     $collection = collect($inscritos);
     $actuales = $collection->count();
@@ -517,7 +526,7 @@ public function  insertar_persona(Request $request){
 
         $form->participantes = json_encode($actuales);
         $form->save();
-        $_SESSION['equipo'] = Crypt::decrypt($request->id);
+        $_SESSION['equipo'] = Crypt::decrypt($request->id_equipo);
         $_SESSION['estado'] = null;
         return redirect('insertar_participante');
     }else{
@@ -530,7 +539,7 @@ public function  insertar_persona(Request $request){
 public function eliminar_participante (Request $request){
     $_SESSION['equipo'] = Crypt::decrypt($request->equipo);
     $cedula=$request->cedula;
-    $id_equipo=$request->equipo;
+    $id_equipo=Crypt::decrypt($request->equipo);
     $form = Form::with('rangoEdad')->find($id_equipo);
     $inscritos = json_decode($form->participantes,true);
     $collection = collect($inscritos);
@@ -543,14 +552,31 @@ public function eliminar_participante (Request $request){
 
 public function insertar_participante(Request $request){
 
-    $id_equipo = (empty($request->equipo))?$_SESSION['equipo']:Crypt::decrypt($request->equipo);
-    if(empty($_SESSION['equipo'])){
-    $_SESSION['equipo']=Crypt::decrypt($request->equipo);
+    if(!empty($request->codigo)){
+
+        $codigo = DB::table('v_codigos')->where(['codigo' => $request->codigo])->first();
+
+        $id_equipo = $codigo->id;
+        if(empty($_SESSION['equipo'])){
+            $_SESSION['equipo']= $codigo->id;
+        }
+    }else{
+        $id_equipo = (empty($request->equipo))?$_SESSION['equipo']:Crypt::decrypt($request->id_equipo);
+        $codigo = DB::table('v_codigos')->where(['id'=> $id_equipo])->first();
+
+        if(empty($_SESSION['equipo'])){
+            $_SESSION['equipo']=Crypt::decrypt($request->id_equipo);
+        }
     }
+
+
+
+
     $form = Form::with('rangoEdad')->find($id_equipo);
     $inscritos = (empty($form->participantes)) ? null : json_decode($form->participantes);
     $data = [
       'equipo' => $form,
+      'codigo' => $codigo->codigo,
       'inscritos' =>$inscritos,
       'estado' =>  (empty($_SESSION['estado']))?null:$_SESSION['estado']
     ];
@@ -567,7 +593,7 @@ public function insertar(Request $request){
 
         //envio de correo
 
-      if($this->inscritos()<=110){
+      if($this->inscritos()<=225){
 
           if(empty($request->tipo_colegio)){
             $request->request->add(['tipo_colegio' => 0]);

@@ -6,7 +6,7 @@
 
 
 @section('content') 
-@if(empty($equipo->rangoEdad['edad']))
+@if(empty($equipo))
 <?php echo "<h4>Se cumplio el tiempo de 24 para el registro mínimo de 12 participantes</h4>"?>
 {{exit()}}
 @endif
@@ -29,7 +29,7 @@
     	<div class="panel panel-default">
 
   	<div class="panel-heading">
-			<h4>Codigo Equipo necesario para volver a editar copialo en un lugar seguro: </h4><textarea readonly style="margin: 0px; width: 1118px; height: 79px;">{{Crypt::encrypt($equipo->id)}}</textarea>
+			<h4>Codigo Equipo necesario para volver a editar copialo en un lugar seguro: {{$codigo}}</h4>
           <h4>Equipo: <span style="color:red"> {{$equipo->nombre_institucion}}</span> </h4>
           <h4>Rango de edad de integrantes en esta categoría: <span style="color:red" id="rango">{{ $equipo->rangoEdad['edad'] }}</span></h4>
 			
@@ -57,14 +57,15 @@
  	</div>
 	<div class="panel-body">
 
-	
+
 
 <div id="demo" class="collapse">
+	<form method="POST" action="insertar_persona" id="form_participante" enctype="multipart/form-data">
   	<div class="row">
 
-	  <form method="POST" action="insertar_persona" id="form_participante" enctype="multipart/form-data">
 
-	<input type="hidden" class="form-control" id="id" name="id" value="{{Crypt::encrypt($equipo->id)}}" >
+
+	<input type="hidden" class="form-control" id="id_equipo" name="id_equipo" value="{{Crypt::encrypt($equipo->id)}}" >
 
   	<div class="col-md-6"><label class="freebirdFormviewerViewItemsItemItemTitle" for="formGroupExampleInput2">Tipo de Documento <span style="color: red;font-size: 11px;text-transform: capitalize;color:red">(Campo Obligatorio)</span></label></div>
        <div class="col-md-6">
@@ -152,7 +153,7 @@
 </div>
        <div class="col-md-6"><input required type="text" class="form-control" id="telefono" name="telefono"></div>
        <div class="col-md-6"><input required type="text" class="form-control" id="eps" name="eps" onkeyup="javascript:this.value=this.value.toUpperCase();" ><br></div>     
-   </div>
+
 
 		</fieldset>
 
@@ -160,7 +161,9 @@
 <button type="submit" id="inscribir persona"  class="btn btn-info">Registrar participante en el grupo</button>
 
 </div>
-</form>
+
+</div>
+	</form>
 </div>
 
 	<script type="text/javascript" src="public/Js/form.js?n=3" ></script>
