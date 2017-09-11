@@ -474,7 +474,11 @@ return true;
 
 public function finalizar(Request $request){
 
+<<<<<<< HEAD
     if($this->inscritos()<=225) {
+=======
+    if($this->inscritos()<=220) {
+>>>>>>> master
         $form = Form::find(Crypt::decrypt($request->id_equipo));
         $inscritos = json_decode($form->participantes, true);
         $collection = collect($inscritos);
@@ -593,7 +597,11 @@ public function insertar(Request $request){
 
         //envio de correo
 
+<<<<<<< HEAD
       if($this->inscritos()<=225){
+=======
+      if($this->inscritos()<=220){
+>>>>>>> master
 
           if(empty($request->tipo_colegio)){
             $request->request->add(['tipo_colegio' => 0]);
